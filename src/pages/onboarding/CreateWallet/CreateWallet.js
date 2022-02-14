@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import navigationPropTypes from '../../../utils/commonPropTypes';
 
 import CreateWalletContext from './CreateWalletContext';
-
+import CreatePassword from './CreatePassword';
 
 const CreateWalletStack = createNativeStackNavigator();
 
@@ -22,6 +22,10 @@ const CreateWallet = ({ navigation }) => {
   }
   return (
     <CreateWalletContext.Provider value={context}>
+      <CreateWalletStack.Navigator initialRouteName="CreatePassword">
+      <CreateWalletStack.Screen name="CreatePassword" component={CreatePassword} options={options} />
+
+      </CreateWalletStack.Navigator>
 
     </CreateWalletContext.Provider>
   );
