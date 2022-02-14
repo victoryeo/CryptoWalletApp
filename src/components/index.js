@@ -1,3 +1,4 @@
 import Loader from './Loader';
+import SafeAreaView from './SafeAreaView';
 
-export { Loader };
+export { Loader, SafeAreaView };
