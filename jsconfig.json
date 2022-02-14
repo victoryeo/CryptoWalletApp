@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "jsx": "react",
+    "target": "es2020",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "src": ["src"],
+      "components": ["src/components"],
+      "components/*": ["src/components/*"],
+
+      "utils": ["src/utils"],
+      "utils/*": ["src/utils/*"],
+
+      "assets": ["src/assets"],
+      "assets/*": ["src/assets/*"],
+
+      "pages": ["src/pages"],
+      "pages/*": ["src/pages/*"],
+
+      "@crypto-redux": ["src/redux"],
+      "@crypto-redux/*": ["src/redux/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
