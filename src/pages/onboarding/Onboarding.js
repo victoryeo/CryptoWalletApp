@@ -5,8 +5,6 @@ import navigationPropTypes from '../../utils/commonPropTypes'
 import bgMain from '../../assets/img/background/splash.jpg';
 import cryptoTitle from '../../assets/img/icon/cryptoIcon.png';
 import styles from './Onboarding.css';
-import ImageSlider from '../../components/ImageSlider';
-import OnboardingRotation from './OnboardingRotation';
 
 const Onboarding = ({ navigation }) => {
   return (
