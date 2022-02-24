@@ -6,7 +6,9 @@ import navigationPropTypes from '../../../utils/commonPropTypes';
 
 import CreateWalletContext from './CreateWalletContext';
 import CreatePassword from './CreatePassword';
+import SecureYourWallet from './SecureYourWallet';
 import { walletActions } from '@crypto-redux/reducers/wallet';
+import { modalActions } from '@crypto-redux/reducers/modal';
 
 const CreateWalletStack = createNativeStackNavigator();
 
@@ -23,11 +25,23 @@ const CreateWallet = ({ navigation }) => {
     handleCreatePasswordSubmitClick: async ({ password }) => {
       dispatch(walletActions.CREATE_WALLET({ password }));
     },
+    handleSecureYourWalletGotInClick: () => {
+      navigation.navigate('WriteDownSeedPhrase');
+    },
+    handleSkipAccountSecurityButtonClick: () => {
+      dispatch(modalActions.TOGGLE_GLOBAL_LOADER(true));
+      setTimeout(() => {
+        setCreateSeedPhraseSuccessful(true);
+        navigation.navigate('ConfirmSeedPhrase');
+        dispatch(modalActions.TOGGLE_GLOBAL_LOADER(false));
+      }, 2000);
+    },
   }
   return (
     <CreateWalletContext.Provider value={context}>
       <CreateWalletStack.Navigator initialRouteName="CreatePassword">
-      <CreateWalletStack.Screen name="CreatePassword" component={CreatePassword} options={options} />
+        <CreateWalletStack.Screen name="CreatePassword" component={CreatePassword} options={options} />
+        <CreateWalletStack.Screen name="SecureYourWallet" component={SecureYourWallet} options={options} />
 
       </CreateWalletStack.Navigator>
 
