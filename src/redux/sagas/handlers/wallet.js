@@ -38,8 +38,7 @@ const generateSeedPhrase = async() => {
 
 const addAccount = async(  
     seedPhrase,
-    addressIndex = 0,
-    name = undefined) => {
+    addressIndex = 0) => {
   // generate hdwallet from seed phrase
   const hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(seedPhrase));
 
@@ -60,7 +59,6 @@ const addAccount = async(
 }
 
 function* createWallet(data) {
-  console.log("createWallet")
   yield put(modalActions.TOGGLE_GLOBAL_LOADER(true));
 
   // Create secret for encrypting privateKey
@@ -68,7 +66,7 @@ function* createWallet(data) {
 
   try {
     const { seedPhrase, seedPhraseList } = yield generateSeedPhrase();
-    const privateKey = yield addAccount({ seedPhrase });
+    const privateKey = yield addAccount(seedPhrase);
     console.log('createWallet:', { seedPhrase, seedPhraseList, privateKey });
 
     yield put(walletActions.SET_PASSWORD(data.payload.password));
