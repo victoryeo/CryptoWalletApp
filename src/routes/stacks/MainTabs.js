@@ -30,7 +30,7 @@ const MainTabs = () => (
               ? 'cloud-upload' 
               : 'cloud-upload-outline';
           }
-          console.log(iconName)
+          //console.log(iconName)
           // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;
         },
