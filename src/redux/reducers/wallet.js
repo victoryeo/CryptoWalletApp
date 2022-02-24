@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-
+  password: null,
+  seedPhrases: null,
 }
 
 const wallet = createSlice({
@@ -10,6 +11,12 @@ const wallet = createSlice({
   reducers: {
     CREATE_WALLET: data => {
       console.log(data)
+    },
+    SET_PASSWORD: (state, action) => {
+      state.password = action.payload;
+    },
+    SET_SEED_PHRASES: (state, action) => {
+      state.seedPhrases = action.payload;
     },
   }
 })
