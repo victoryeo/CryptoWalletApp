@@ -3,6 +3,8 @@ import { navigate } from 'utils/NavigationService';
 import { walletActions } from '@crypto-redux/reducers/wallet';
 import { modalActions } from '@crypto-redux/reducers/modal';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
+import bip39 from 'react-native-bip39';
+import { hdkey } from 'ethereumjs-wallet';
 
 const setSecretPassword = async () => {
   try {
@@ -28,14 +30,49 @@ const getSecretPassword = async () => {
   }
 }
 
+const generateSeedPhrase = async() => {
+  const seedPhrase = await bip39.generateMnemonic(128);
+  const seedPhraseList = seedPhrase.split(" ");
+  return { seedPhrase, seedPhraseList };
+}
+
+const addAccount = async(  
+    seedPhrase,
+    addressIndex = 0,
+    name = undefined) => {
+  // generate hdwallet from seed phrase
+  const hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(seedPhrase));
+
+  // from BIP44, HD derivation path is:
+  // m / purpose' / coin_type' / account' / change / address_index
+  const path = `m/44'/60'/0'/0/${addressIndex}`;
+  const wallet = hdwallet.derivePath(path).getWallet();
+  const privateKey = wallet.getPrivateKeyString();
+
+  // Encrypt privateKey
+  //let encryptedPrivateKey = '';
+  const securePhrase = await getSecretPassword();
+  if (securePhrase) {
+    //const encrypted = await CryptoJS.AES.encrypt(privateKey, securePhrase);
+    //encryptedPrivateKey = encrypted.toString();
+  }
+  return privateKey;
+}
+
 function* createWallet(data) {
   console.log("createWallet")
   yield put(modalActions.TOGGLE_GLOBAL_LOADER(true));
 
-  // Create new securePhrase for encrypting privateKey
+  // Create secret for encrypting privateKey
   setSecretPassword();
 
   try {
+    const { seedPhrase, seedPhraseList } = yield generateSeedPhrase();
+    const privateKey = yield addAccount({ seedPhrase });
+    console.log('createWallet:', { seedPhrase, seedPhraseList, privateKey });
+
+    yield put(walletActions.SET_PASSWORD(data.payload.password));
+    yield put(walletActions.SET_SEED_PHRASES(seedPhraseList));
     yield call(navigate, 'SecureYourWallet');    
   } catch (err) {
     console.log('CreateWallet error:', err);
