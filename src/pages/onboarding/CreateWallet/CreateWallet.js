@@ -7,6 +7,7 @@ import navigationPropTypes from '../../../utils/commonPropTypes';
 import CreateWalletContext from './CreateWalletContext';
 import CreatePassword from './CreatePassword';
 import SecureYourWallet from './SecureYourWallet';
+import WriteDownSeedPhrase from './WriteDownSeedPhrase';
 import { walletActions } from '@crypto-redux/reducers/wallet';
 import { modalActions } from '@crypto-redux/reducers/modal';
 
@@ -36,12 +37,16 @@ const CreateWallet = ({ navigation }) => {
         dispatch(modalActions.TOGGLE_GLOBAL_LOADER(false));
       }, 2000);
     },
+    handleWriteDownSeedPhraseContinueClick: () => {
+      //dispatch(authActions.SIGN_IN());
+    },
   }
   return (
     <CreateWalletContext.Provider value={context}>
       <CreateWalletStack.Navigator initialRouteName="CreatePassword">
         <CreateWalletStack.Screen name="CreatePassword" component={CreatePassword} options={options} />
         <CreateWalletStack.Screen name="SecureYourWallet" component={SecureYourWallet} options={options} />
+        <CreateWalletStack.Screen name="WriteDownSeedPhrase" component={WriteDownSeedPhrase} options={options} />
 
       </CreateWalletStack.Navigator>
 
