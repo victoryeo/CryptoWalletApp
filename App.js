@@ -1,3 +1,5 @@
+import './shim';
+
 import React from 'react';
 import type { Node } from 'react';
 import { Provider } from 'react-redux';
