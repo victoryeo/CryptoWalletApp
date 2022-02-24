@@ -6,6 +6,8 @@ import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import bip39 from 'react-native-bip39';
 import { hdkey } from 'ethereumjs-wallet';
 
+const CryptoJS = require("crypto-js");
+
 const setSecretPassword = async () => {
   try {
     const secretPassword = Math.random().toString(36).slice(-10);
@@ -49,13 +51,13 @@ const addAccount = async(
   const privateKey = wallet.getPrivateKeyString();
 
   // Encrypt privateKey
-  //let encryptedPrivateKey = '';
+  let encryptedPrivateKey = '';
   const securePhrase = await getSecretPassword();
   if (securePhrase) {
-    //const encrypted = await CryptoJS.AES.encrypt(privateKey, securePhrase);
-    //encryptedPrivateKey = encrypted.toString();
+    const encrypted = await CryptoJS.AES.encrypt(privateKey, securePhrase);
+    encryptedPrivateKey = encrypted.toString();
   }
-  return privateKey;
+  return encryptedPrivateKey;
 }
 
 function* createWallet(data) {
@@ -66,8 +68,8 @@ function* createWallet(data) {
 
   try {
     const { seedPhrase, seedPhraseList } = yield generateSeedPhrase();
-    const privateKey = yield addAccount(seedPhrase);
-    console.log('createWallet:', { seedPhrase, seedPhraseList, privateKey });
+    const encryptedPrivateKey = yield addAccount(seedPhrase);
+    console.log('createWallet:', { seedPhrase, seedPhraseList, encryptedPrivateKey });
 
     yield put(walletActions.SET_PASSWORD(data.payload.password));
     yield put(walletActions.SET_SEED_PHRASES(seedPhraseList));
