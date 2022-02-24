@@ -8,10 +8,12 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import createSagaMiddleware from 'redux-saga';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import reducer from './reducers';
+import rootSaga from './sagas/rootSaga';
 
 const persistConfig = {
   key: 'root',
@@ -21,6 +23,8 @@ const persistConfig = {
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer);
+
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -32,7 +36,10 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    sagaMiddleware,
   ],
 });
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
