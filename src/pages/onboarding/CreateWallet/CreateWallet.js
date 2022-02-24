@@ -21,7 +21,6 @@ const CreateWallet = ({ navigation }) => {
   const context = {
     createSeedPhraseSuccessful,
     handleCreatePasswordSubmitClick: async ({ password }) => {
-      console.log("handleCreatePasswordSubmitClick")
       dispatch(walletActions.CREATE_WALLET({ password }));
     },
   }

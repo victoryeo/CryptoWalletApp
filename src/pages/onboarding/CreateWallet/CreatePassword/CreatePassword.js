@@ -1,16 +1,17 @@
 import React, { useRef, useContext, useState, useEffect } from 'react';
-import { Text, TextInput, Button, View } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+import { Text, View } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRoute } from '@react-navigation/native';
 
+import TextInput from 'src/components/TextInput';
+import Button from 'src/components/Button';
+
 import { SafeAreaView } from '../../../../components';
 import navigationPropTypes from '../../../../utils/commonPropTypes';
 import CreateWalletContext from '../CreateWalletContext';
 import styles from './CreatePassword.css';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const getPasswordStrength = password => {
   const lowerCaseExists = password.match('(?=.*[a-z])');
@@ -60,14 +61,11 @@ const CreatePassword = ({ navigation }) => {
   const CreatePasswordForm = {
     initialValue: {
       password: '',
-      confirmPassword: '',
-      signInWithFaceId: false,
-      tnc: false,
+      confirmPassword: ''
     },
     validationSchema: Yup.object().shape({
-      password: Yup.string().required('Required').min(8, 'Must be at least 8 characters'),
+      password: Yup.string().required('Required').min(4, 'Must be at least 4 characters'),
       confirmPassword: Yup.string().required('Required'),
-      tnc: Yup.bool().oneOf([true], 'Field must be checked'),
     }),
     validate: async values => {
       const errors = {};
@@ -86,34 +84,21 @@ const CreatePassword = ({ navigation }) => {
 
   const context = useContext(CreateWalletContext);
 
-  const { handleChange, handleSubmit, setFieldValue, values, errors, touched } = useFormik({
+  console.log("use Formik")
+  const { handleChange, handleSubmit, values } = useFormik({
     initialValues: CreatePasswordForm.initialValue,
     validationSchema: CreatePasswordForm.validationSchema,
     validate: CreatePasswordForm.validate,
     onSubmit: context.handleCreatePasswordSubmitClick,
+    //onSubmit: values => {
+    //  alert(JSON.stringify(values, null, 2));
+    //},
     validateOnChange: false,
     validateOnBlur: false,
   });
 
-  const getValidationError = key => touched[key] && errors[key];
-
-  const getPasswordHelperText = () => {
-    if (values.password.length < 8)
-      return (
-        <Text>
-          Must be at least 8 characters
-        </Text>
-      );
-    return (
-      <Text>
-        {`Password Strength: `}
-        {getPasswordStrength(values.password)}
-      </Text>
-    );
-  };
-
   return (
-      <View>
+      <SafeAreaView style={[styles.safeAreaContainer]}>
         <View style={[styles.container]}>
           <View style={[styles.containerLogoAndTitle]}>
             <Text style={[styles.bigwords]}>
@@ -127,30 +112,33 @@ const CreatePassword = ({ navigation }) => {
             <Text style={[styles.words]}>Enter Password</Text>
             <TextInput
               secureTextEntry={true}
+              autoCapitalize='none'
               value={values.password}
               onChangeText={handleChange('password')}
               onSubmitEditing={() => {
                 CreatePasswordForm.refs.confirmPassword.current?.focus();
               }}
               returnKeyType="next"
+              returnKeyLabel='next'
               style={[styles.input]}
             />
             <Text style={[styles.words]}>Confirm Password</Text>
             <TextInput
               secureTextEntry={true}
+              autoCapitalize='none'
               value={values.confirmPassword}
-              ref={CreatePasswordForm.refs.confirmPassword}
               onChangeText={handleChange('confirmPassword')}
               returnKeyType="done"
+              returnKeyLabel='done'
               style={[styles.input]}
             />
           </View>
 
           <View style={[styles.buttonsContainer]}>
-            <Button title="Next" onPress={handleSubmit} />
+            <Button label="Next" onPress={handleSubmit} />
           </View>
         </View>
-      </View>
+      </SafeAreaView>
   );
 };
 
