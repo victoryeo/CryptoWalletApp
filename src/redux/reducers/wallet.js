@@ -10,7 +10,7 @@ const wallet = createSlice({
   initialState,
   reducers: {
     CREATE_WALLET: data => {
-      console.log(data)
+      console.log('CREATE_WALLET reducer ', {data})
     },
     SET_PASSWORD: (state, action) => {
       state.password = action.payload;
