@@ -10,6 +10,7 @@ import SecureYourWallet from './SecureYourWallet';
 import WriteDownSeedPhrase from './WriteDownSeedPhrase';
 import { walletActions } from '@crypto-redux/reducers/wallet';
 import { modalActions } from '@crypto-redux/reducers/modal';
+import { authActions } from '@crypto-redux/reducers/auth';
 
 const CreateWalletStack = createNativeStackNavigator();
 
@@ -38,7 +39,7 @@ const CreateWallet = ({ navigation }) => {
       }, 2000);
     },
     handleWriteDownSeedPhraseContinueClick: () => {
-      //dispatch(authActions.SIGN_IN());
+      dispatch(authActions.SIGN_IN());
     },
   }
   return (
