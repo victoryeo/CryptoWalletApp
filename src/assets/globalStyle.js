@@ -1,3 +1,5 @@
+import { wpx } from 'src/utils/dimensions';
+
 const general = {
   colors: {
     // gray scale
@@ -44,6 +46,11 @@ const general = {
     semiBold: '600',
     bold: '700',
     strong: '900',
+  },
+  constant: {
+    SIDE_MARGIN: wpx(24),
+    SIDE_MARGIN_NARROW: wpx(16),
+    FONT_FAMILY:'SFPRODISPLAYREGULAR'
   },
   icon: {
     BACK: 'back',
