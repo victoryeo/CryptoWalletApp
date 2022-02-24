@@ -84,7 +84,6 @@ const CreatePassword = ({ navigation }) => {
 
   const context = useContext(CreateWalletContext);
 
-  console.log("use Formik")
   const { handleChange, handleSubmit, values } = useFormik({
     initialValues: CreatePasswordForm.initialValue,
     validationSchema: CreatePasswordForm.validationSchema,

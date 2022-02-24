@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Text, View, Image, ImageBackground } from 'react-native';
+import { Text, View, Image, ImageBackground } from 'react-native';
+import Button from 'src/components/Button';
 
 import { SafeAreaView } from '../../../components';
 import navigationPropTypes from '../../../utils/commonPropTypes';
@@ -20,8 +21,7 @@ const Landing = ({ navigation }) => {
         </View>
         <View style={[styles.buttonsContainer]}>
           <Button
-            title="Create a New Wallet"
-            type="secondary"
+            label="Create a New Wallet"
             onPress={() => navigation.navigate('CreateWallet')}
           />
         </View>

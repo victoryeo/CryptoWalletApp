@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, View, Image, ImageBackground } from 'react-native';
+import { View, Image, ImageBackground } from 'react-native';
+import Button from 'src/components/Button';
 import { SafeAreaView } from '../../components';
 import navigationPropTypes from '../../utils/commonPropTypes'
 import bgMain from '../../assets/img/background/splash.jpg';
@@ -16,8 +17,7 @@ const Onboarding = ({ navigation }) => {
 
         <View style={[styles.buttonsContainer]}>
           <Button
-            title="Get Started"
-            type="secondary"
+            label="Get Started"
             onPress={() => navigation.navigate('Landing')}
           />
         </View>
