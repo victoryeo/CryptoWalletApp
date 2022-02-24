@@ -18,6 +18,11 @@ const wallet = createSlice({
     SET_SEED_PHRASES: (state, action) => {
       state.seedPhrases = action.payload;
     },
+    CLEAN_USER_DATA: state => {
+      Object.keys(initialState).forEach(stateKey => {
+        state[stateKey] = initialState[stateKey];
+      });
+    },
   }
 })
 
