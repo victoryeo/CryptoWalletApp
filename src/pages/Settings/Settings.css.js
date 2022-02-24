@@ -18,6 +18,16 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginTop: wpx(8),
   },
+  leftSec: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  blackwords: {
+    color: g.colors.black,
+    textAlign: 'center',
+    marginTop: wpx(4),
+  },
   safeAreaContainer: {
     backgroundColor: 'black',
     flexGrow: 1,

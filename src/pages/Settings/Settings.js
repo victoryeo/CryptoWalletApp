@@ -14,10 +14,10 @@ const Settings = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const settingsList = [{
-    //  title: 'Share My Public Address',
-    //  icon: <Image source={iconShareAddress} style={styles.panelIcon} />,
-    //  onPress: () => Share.share({ message: "account Address" }),
-    //}, {
+      title: 'Share My Public Address',
+      icon: <Image source={iconShareAddress} style={styles.panelIcon} />,
+      onPress: () => Share.share({ message: "account Address" }),
+    }, {
       title: 'Log out',
       icon: <Image source={iconLogout} style={styles.panelIcon} />,
       onPress: () => {
@@ -26,27 +26,25 @@ const Settings = ({ navigation }) => {
       wrapStyle: { marginTop: wpx(34) }
     }]
   return (
-    <SafeAreaView style={[styles.safeAreaContainer]}>
-      <View style={[styles.container]}>
-      <Text style={styles.words}>Settings</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={[styles.words]}>Settings</Text>
       <FlatList 
         data={settingsList}
         renderItem={({ item }) => 
         <TouchableOpacity
           onPress={item.onPress}>
-          <View style={styles.flatlist}>
-            <View>
+          <View style={styles.container}>
+            <View style={styles.leftSec}>
               {item.icon}
-            </View>
-            <View style={{ backgroundColor: 'white' }}>
-              <Text style={styles.words} >{item.title}</Text>
+              <View style={[ styles.flatlist ]}>
+                <Text style={styles.words} >{item.title}</Text>
+              </View>
             </View>
           </View>
         </TouchableOpacity>}
         keyExtractor={item => item.title}
         contentContainerStyle={styles.flatlist}
       />
-      </View>
     </SafeAreaView>
   )
 }
