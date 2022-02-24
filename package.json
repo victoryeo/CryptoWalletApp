@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/checkbox": "^0.5.9",
+    "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
     "@reduxjs/toolkit": "^1.7.2",
@@ -45,6 +46,7 @@
     "react-native-screens": "^3.11.1",
     "react-native-tcp": "^3.2.1",
     "react-native-udp": "^2.1.0",
+    "react-native-vector-icons": "^9.1.0",
     "react-redux": "^7.2.6",
     "readable-stream": "1.0.33",
     "redux-persist": "^6.0.0",
