@@ -57,6 +57,19 @@ const general = {
   },
 };
 
+const custom = {
+  flex1: {
+    flex: 1,
+  },
+  flexGrow: {
+    flexGrow: 1,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+};
+
 export default {
   ...general,
+  custom
 };
