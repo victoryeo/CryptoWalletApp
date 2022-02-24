@@ -6,6 +6,26 @@ import g from 'src/assets/globalStyle';
 const MARGIN_HOR = wpx (16);
 
 export default StyleSheet.create({
+  panelIcon: {
+    width: wpx(40),
+    height: wpx(40),
+  },
+  flatlist: {
+    paddingBottom: wpx(14),
+  },
+  words: {
+    color: g.colors.white,
+    textAlign: 'center',
+    marginTop: wpx(8),
+  },
+  safeAreaContainer: {
+    backgroundColor: 'black',
+    flexGrow: 1,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
   bgContainer: {
     flex: 1,
   },
