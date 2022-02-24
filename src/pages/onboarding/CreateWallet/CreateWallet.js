@@ -6,6 +6,7 @@ import navigationPropTypes from '../../../utils/commonPropTypes';
 
 import CreateWalletContext from './CreateWalletContext';
 import CreatePassword from './CreatePassword';
+import { walletActions } from '@crypto-redux/reducers/wallet';
 
 const CreateWalletStack = createNativeStackNavigator();
 
@@ -19,6 +20,10 @@ const CreateWallet = ({ navigation }) => {
   const [createSeedPhraseSuccessful, setCreateSeedPhraseSuccessful] = useState(false);
   const context = {
     createSeedPhraseSuccessful,
+    handleCreatePasswordSubmitClick: async ({ password }) => {
+      console.log("handleCreatePasswordSubmitClick")
+      dispatch(walletActions.CREATE_WALLET({ password }));
+    },
   }
   return (
     <CreateWalletContext.Provider value={context}>

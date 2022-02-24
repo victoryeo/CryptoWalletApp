@@ -8,7 +8,9 @@ const wallet = createSlice({
   name: 'wallet',
   initialState,
   reducers: {
-
+    CREATE_WALLET: data => {
+      console.log(data)
+    },
   }
 })
 
