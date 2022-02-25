@@ -14,7 +14,7 @@ const RoutesStack = () => {
 
   const renderScreens = () => {
     if (!isAppInitialized) {
-      //return <Stack.Screen name="Launch" component={Launch} />;
+      return <Stack.Screen name="Launch" component={Launch} />;
     }
 
     if (!isAuthenticated) {
