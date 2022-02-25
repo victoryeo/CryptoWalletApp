@@ -1,8 +1,10 @@
-import { all, fork } from 'redux-saga/effects';
+import { all, fork, call } from 'redux-saga/effects';
 import sagaHandler from './handlers';
 
 function* rootSaga() {
-  yield all(sagaHandler.map(s => fork(s)));
+  yield all(sagaHandler.map(saga => 
+    fork(saga)
+  ));
 }
 
 export default rootSaga;
