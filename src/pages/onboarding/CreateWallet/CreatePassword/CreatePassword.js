@@ -121,7 +121,8 @@ const CreatePassword = ({ navigation }) => {
               returnKeyLabel='next'
               style={[styles.input]}
             />
-            <Text style={[styles.words]}>Confirm Password</Text>
+            <View style={styles.space} />
+            <Text style={[styles.words]}>{'\n'}Confirm Password</Text>
             <TextInput
               secureTextEntry={true}
               autoCapitalize='none'

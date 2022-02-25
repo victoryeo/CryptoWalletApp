@@ -7,6 +7,10 @@ export default StyleSheet.create({
     backgroundColor: 'black',
     flexGrow: 1,
   },
+  space: {
+    width: 20,
+    height: 20,
+  },
   container: {
     flexGrow: 1,
     paddingHorizontal: wpx(16),
