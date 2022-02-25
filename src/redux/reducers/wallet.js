@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   password: null,
   seedPhrases: null,
+  accounts: [],
 }
 
 const wallet = createSlice({
@@ -22,6 +23,9 @@ const wallet = createSlice({
       Object.keys(initialState).forEach(stateKey => {
         state[stateKey] = initialState[stateKey];
       });
+    },
+    ADD_ACCOUNT: (state, action) => {
+      state.accounts = [...state.accounts, action.payload];
     },
   }
 })
