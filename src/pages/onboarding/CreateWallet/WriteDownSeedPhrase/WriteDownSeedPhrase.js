@@ -31,7 +31,8 @@ const WriteDownSeedPhrase = ({ navigation }) => {
           </Text>
         </View>
         <View style={[styles.seedPhrasesContainer]}>
-          <Text>{seedPhrases}</Text>
+          { seedPhrases.map((val, index) => 
+          (<Text style={[styles.words]} key={index}>{index+1}: {val}</Text>))}
         </View>
         <View style={[styles.buttonsContainer]}>
           <Button label="Continue" onPress={handleWriteDownSeedPhraseContinueClick} />
