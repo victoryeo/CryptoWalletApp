@@ -9,6 +9,7 @@ function* initWeb3Instance() {
   try {
     if (!web3Client) {
       web3Client = new Web3Client();
+      //console.log(web3Client)
       return true;
     }
   } catch (err) {
