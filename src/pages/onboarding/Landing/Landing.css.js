@@ -9,13 +9,19 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
+  bigwords: {
+    color: 'yellow',
+    textAlign: 'center',
+    marginTop: wpx(8),
+    fontSize: 30,
+  },
   containerLogoAndTitle: {
-    flexGrow: 1,
-    paddingTop: wpx(60),
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingBottom: wpx(98),
-    paddingHorizontal: wpx(54),
+    marginTop: wpx(60), 
+    alignItems: 'center' 
+  },
+  space: {
+    width: 20,
+    height: 20,
   },
   contentContainer: {
     paddingHorizontal: wpx(60),

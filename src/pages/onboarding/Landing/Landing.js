@@ -15,7 +15,7 @@ const Landing = ({ navigation }) => {
       <SafeAreaView style={[styles.container]}>
         <View style={[styles.containerLogoAndTitle]}>
           <Image source={cryptoLogo} />
-          <Text center white fs16 mediumBold>
+          <Text style={styles.bigwords}>
             {`Crypto wallet app`}
           </Text>
         </View>
@@ -23,6 +23,11 @@ const Landing = ({ navigation }) => {
           <Button
             label="Create a New Wallet"
             onPress={() => navigation.navigate('CreateWallet')}
+          />
+          <View style={styles.space} />
+          <Button
+            label="Import Using Seed Phrase"
+            onPress={() => navigation.navigate('ImportFromSeed')}
           />
         </View>
       </SafeAreaView>
