@@ -7,12 +7,22 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
+    justifyContent: 'space-between',
   },
   containerItem: {
     backgroundColor: 'yellow',
     flexDirection: 'row',
   },
-  containerLogoAndTitle: { marginTop: wpx(60), alignItems: 'center' },
+  bigwords: {
+    color: 'yellow',
+    textAlign: 'center',
+    marginTop: wpx(8),
+    fontSize: 30,
+  },
+  containerLogoAndTitle: { 
+    marginTop: wpx(60), 
+    alignItems: 'center' 
+  },
   containerOnboardingText: {
     paddingHorizontal: wpx(50),
   },
