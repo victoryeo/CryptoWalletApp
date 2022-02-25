@@ -16,7 +16,7 @@ const Landing = ({ navigation }) => {
         <View style={[styles.containerLogoAndTitle]}>
           <Image source={cryptoLogo} />
           <Text style={styles.bigwords}>
-            {`Crypto wallet app`}
+            {`Crypto Wallet App`}
           </Text>
         </View>
         <View style={[styles.buttonsContainer]}>
