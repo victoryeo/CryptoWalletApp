@@ -1,17 +1,18 @@
-import image3 from '../../assets/img/icon/crypto3.png';
-import image1 from '../../assets/img/icon/image1.png';
+import image1 from 'src/assets/img/icon/cryptoIcon.png';
+import image2 from 'src/assets/img/icon/image2.jpeg';
+import image3 from 'src/assets/img/icon/crypto3.png';
 
 export default [
   {
-    imageSource: image1,
+    url: image1,
     text: `page1`,
   },
   {
-    imageSource: image1,
+    url: image2,
     text: `page2.`,
   },
   {
-    imageSource: image3,
+    url: image3,
     text: `page3`,
   },
 ];
