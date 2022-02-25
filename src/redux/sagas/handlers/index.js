@@ -1,9 +1,11 @@
-import walletSaga from './wallet';
 import authSaga from './wallet';
+import walletSaga from './wallet';
+import generalSaga from './general';
 
 const sagaHandler = [
-  walletSaga,
   authSaga,
+  walletSaga,
+  generalSaga,
 ];
 
 export default sagaHandler;
