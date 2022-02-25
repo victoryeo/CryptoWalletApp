@@ -1,17 +1,12 @@
 import { call, put, takeEvery, all, select, delay } from 'redux-saga/effects';
 import { REHYDRATE } from 'redux-persist';
 import { authActions } from 'src/redux/reducers/auth';
-import Web3Client from 'src/utils/Web3Client';
-
-export let web3Client = null;
+import { initWeb3Client } from 'src/utils/initWeb3Client';
 
 function* initWeb3Instance() {
   try {
-    if (!web3Client) {
-      web3Client = new Web3Client();
-      //console.log(web3Client)
-      return true;
-    }
+    initWeb3Client();
+    return true;
   } catch (err) {
     console.log('init web3 ' + err);
     return false;
