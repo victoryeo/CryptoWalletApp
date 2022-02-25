@@ -5,6 +5,7 @@ import { modalActions } from '@crypto-redux/reducers/modal';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import bip39 from 'react-native-bip39';
 import { hdkey } from 'ethereumjs-wallet';
+import { web3Client } from 'src/utils/initWeb3Client';
 
 const CryptoJS = require("crypto-js");
 
@@ -50,6 +51,9 @@ const addAccount = async(
   const wallet = hdwallet.derivePath(path).getWallet();
   const privateKey = wallet.getPrivateKeyString();
 
+  // Add privateKey to Web3 Wallet
+  web3Client.addAccountToWallet({ privateKey });
+
   // Encrypt privateKey
   let encryptedPrivateKey = '';
   const securePhrase = await getSecretPassword();
@@ -57,7 +61,9 @@ const addAccount = async(
     const encrypted = await CryptoJS.AES.encrypt(privateKey, securePhrase);
     encryptedPrivateKey = encrypted.toString();
   }
-  return encryptedPrivateKey;
+  const accountAddress = wallet.getAddressString();
+  // return an object to called
+  return {accountAddress, encryptedPrivateKey};
 }
 
 function* createWallet(data) {
@@ -68,11 +74,12 @@ function* createWallet(data) {
 
   try {
     const { seedPhrase, seedPhraseList } = yield generateSeedPhrase();
-    const encryptedPrivateKey = yield addAccount(seedPhrase);
-    console.log('createWallet:', { seedPhrase, seedPhraseList, encryptedPrivateKey });
+    const accountCreated = yield addAccount(seedPhrase);
+    console.log('createWallet:', { seedPhrase, seedPhraseList, accountCreated });
 
     yield put(walletActions.SET_PASSWORD(data.payload.password));
     yield put(walletActions.SET_SEED_PHRASES(seedPhraseList));
+    yield put(walletActions.ADD_ACCOUNT(accountCreated));
     yield call(navigate, 'SecureYourWallet');    
   } catch (err) {
     console.log('CreateWallet error:', err);
