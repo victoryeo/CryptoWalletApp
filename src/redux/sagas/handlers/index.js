@@ -1,4 +1,4 @@
-import authSaga from './wallet';
+import authSaga from './auth';
 import walletSaga from './wallet';
 import generalSaga from './general';
 
