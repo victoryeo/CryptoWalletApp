@@ -142,6 +142,10 @@ function* importFromPrivateKey(action) {
 
     console.log('importFromPrivateKey:', { privateKey, accountCreated });
 
+    yield put(walletActions.ADD_ACCOUNT(accountCreated));
+    yield put(walletActions.SET_CURRENT_ACCOUNT(accountCreated));
+    yield put(authActions.SIGN_IN());
+
   } catch (err) {
     console.log('importFromPrivateKey error:', err);
   }
