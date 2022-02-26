@@ -27,7 +27,7 @@ const Landing = ({ navigation }) => {
           <View style={styles.space} />
           <Button
             label="Import Using Seed Phrase"
-            onPress={() => navigation.navigate('ImportFromSeed')}
+            onPress={() => navigation.navigate('ImportSeed')}
           />
         </View>
       </SafeAreaView>
