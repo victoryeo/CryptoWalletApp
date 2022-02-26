@@ -1,5 +1,7 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { TextInput as RNTextInput, View, StyleSheet } from 'react-native';
+import styles from './TextInput.css';
 
 export default function TextInput({ ...otherProps }) {
   const validationColor = '#223e4b';
@@ -24,6 +26,11 @@ export default function TextInput({ ...otherProps }) {
           {...otherProps}
         />
       </View>
+      {!!otherProps.error && (
+          <Text style={styles.redwords}>
+            {otherProps.error}
+          </Text>
+        )}
     </View>
   );
 }
