@@ -2,6 +2,7 @@ import { call, put, takeEvery, all, select } from 'redux-saga/effects';
 import { navigate } from 'utils/NavigationService';
 import { walletActions } from '@crypto-redux/reducers/wallet';
 import { modalActions } from '@crypto-redux/reducers/modal';
+import { authActions } from '@crypto-redux/reducers/auth';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import bip39 from 'react-native-bip39';
 import { hdkey } from 'ethereumjs-wallet';
@@ -86,15 +87,28 @@ function* createWallet(data) {
   }
 }
 
-function* importFromWallet(action) {
-    console.log('importFromWallet')
+function* importFromSeedPhrase(action) {
     // Create secret for encrypting privateKey
     setSecretPassword();
+
+    try {
+      const seedPhrase = action.payload.token;
+      const seedPhraseList = seedPhrase.split(' ');
+      const accountCreated = yield addAccount(seedPhrase);
+
+      console.log('importFromSeedPhrase:', { seedPhrase, seedPhraseList, accountCreated });
+
+      yield put(walletActions.SET_SEED_PHRASES(seedPhraseList));
+      yield put(authActions.SIGN_IN());
+
+    } catch (err) {
+      console.log('importFromSeedPhrase error:', err);
+    }
 }
 
 export default function* walletSaga() {
   yield all([
     yield takeEvery(walletActions.CREATE_WALLET, createWallet),
-    yield takeEvery(walletActions.IMPORT_WALLET, importFromWallet),
+    yield takeEvery(walletActions.IMPORT_WALLET, importFromSeedPhrase),
   ]);
 }
