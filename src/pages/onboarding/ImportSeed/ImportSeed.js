@@ -8,7 +8,7 @@ import { walletActions } from '@crypto-redux/reducers/wallet';
 import navigationPropTypes from 'utils/commonPropTypes';
 import { SafeAreaView } from 'components';
 import Button from 'src/components/Button';
-import g from 'src/assets/globalStyle';
+import TextInput from 'src/components/TextInput';
 
 import styles from './ImportSeed.css';
 
@@ -30,7 +30,7 @@ const ImportSeed = ({ navigation }) => {
     dispatch(walletActions.IMPORT_WALLET({ token: seedPhrase }));
   };
 
-  const { handleSubmit } =
+  const { handleSubmit, handleChange, values } =
     useFormik({
       initialValues: form.initialValue,
       validate: form.validate,
@@ -46,6 +46,43 @@ const ImportSeed = ({ navigation }) => {
       >
 
         <View style={[styles.container]}>
+          <View>
+            <Text style={[styles.words]}>Enter Seed Phrase</Text>
+            <TextInput
+              autoCapitalize='none'
+              value={values.seed}
+              onChangeText={handleChange('seed')}
+              onSubmitEditing={() => form.refs.password.current?.focus()}
+              showScan
+              returnKeyType="next"
+              returnKeyLabel='next'
+              style={[styles.input]}
+            />
+            <Text style={[styles.words]}>Enter Password</Text>
+            <TextInput
+              secureTextEntry={true}
+              autoCapitalize='none'
+              value={values.password}
+              onChangeText={handleChange('password')}
+              onSubmitEditing={() => {
+                form.refs.confirmPassword.current?.focus();
+              }}
+              returnKeyType="next"
+              returnKeyLabel='next'
+              style={[styles.input]}
+            />
+            <Text style={[styles.words]}>{'\n'}Confirm Password</Text>
+            <TextInput
+              secureTextEntry={true}
+              autoCapitalize='none'
+              value={values.confirmPassword}
+              onChangeText={handleChange('confirmPassword')}
+              onSubmitEditing={() => form.refs.confirmPassword.current?.blur()}
+              returnKeyType="done"
+              returnKeyLabel='done'
+              style={[styles.input]}
+            />
+          </View>
      
           <View style={[styles.buttonsContainer]}>
             <Button label="Import" onPress={handleSubmit} />

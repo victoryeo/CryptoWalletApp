@@ -27,4 +27,16 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: wpx(50),
   },
+  words: {
+    color: g.colors.white,
+    textAlign: 'center',
+    marginTop: wpx(8),
+  },
+  input: {
+    backgroundColor: g.colors.darkGray,
+    marginTop: wpx(4),
+    height: wpx(28),
+    color: g.colors.white,
+    paddingLeft: wpx(16),
+  },
 });
