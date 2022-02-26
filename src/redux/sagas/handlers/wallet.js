@@ -86,8 +86,15 @@ function* createWallet(data) {
   }
 }
 
+function* importFromWallet(action) {
+    console.log('importFromWallet')
+    // Create secret for encrypting privateKey
+    setSecretPassword();
+}
+
 export default function* walletSaga() {
   yield all([
     yield takeEvery(walletActions.CREATE_WALLET, createWallet),
+    yield takeEvery(walletActions.IMPORT_WALLET, importFromWallet),
   ]);
 }
