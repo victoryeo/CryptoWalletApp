@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Wallet from 'src/pages/Wallet';
+import NFT from 'src/pages/NFT';
 import Settings from 'src/pages/Settings';
 import { wpx } from 'utils/dimensions';
 import g from 'src/assets/globalStyle';
@@ -29,6 +30,10 @@ const MainTabs = () => (
             iconName = focused 
               ? 'cloud-upload' 
               : 'cloud-upload-outline';
+          } else if (route.name === 'NFT') {
+            iconName = focused 
+            ? 'cloud-upload' 
+            : 'cloud-upload-outline';
           }
           //console.log(iconName)
           // You can return any component that you like here!
@@ -45,6 +50,7 @@ const MainTabs = () => (
       initialRouteName="Wallet"
     >
       <Tab.Screen name="Wallet" component={Wallet} options={options} />
+      <Tab.Screen name="NFT" component={NFT} options={options} />
       <Tab.Screen name="Settings" component={Settings} options={options} />
     </Tab.Navigator>
   </View>
