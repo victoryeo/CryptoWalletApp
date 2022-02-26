@@ -13,13 +13,17 @@ const Wallet = ({ navigation }) => {
   const [gasPrice, setGasPrice] = useState(0);
   useEffect(() => {
     const fetchBalance = async() => {
-      const data = await getAccountBalance(currentAccount.accountAddress);
+      let data = await getAccountBalance(currentAccount.accountAddress);
+      // 1ETH = 10^18 wei
+      data = data / 1e18;
       setBala(data)
     }
     fetchBalance().catch(console.error)
 
     const fetchGasPrice = async() => {
-      const data = await getGasPrice();
+      let data = await getGasPrice();
+      // 1GWEI = 10^9 wei
+      data = data / 1e9;
       setGasPrice(data)
     }
     fetchGasPrice().catch(console.error)
@@ -30,10 +34,10 @@ const Wallet = ({ navigation }) => {
     <SafeAreaView style={[styles.bgContainer]}>
       <View style={[styles.container]}>
       
-        <Text style={[styles.bigwords]}>Gas price: {gasPrice}</Text>
+        <Text style={[styles.bigwords]}>Gas price: {gasPrice} Gwei</Text>
         <Text style={[styles.bigwords]}>Account Information</Text>
         <Text style={[styles.words]}>address: {currentAccount.accountAddress}</Text>
-        <Text style={[styles.words]}>balance: {bala}</Text>        
+        <Text style={[styles.words]}>balance: {bala} ETH</Text>        
       </View>
     </SafeAreaView>
   )
