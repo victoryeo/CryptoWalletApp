@@ -4,6 +4,7 @@ const initialState = {
   password: null,
   seedPhrases: null,
   accounts: [],
+  currentAccount: null,
 }
 
 const wallet = createSlice({
@@ -28,6 +29,11 @@ const wallet = createSlice({
       state.accounts = [...state.accounts, action.payload];
     },
     IMPORT_WALLET: () => {},
+    SET_CURRENT_ACCOUNT: (state, action) => {
+      state.currentAccount = {
+        ...action.payload,
+      };
+    },
   }
 })
 
