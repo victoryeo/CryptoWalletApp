@@ -33,18 +33,10 @@ export default StyleSheet.create({
   },
   input: {
     backgroundColor: g.colors.darkGray,
-    marginTop: wpx(24),
-    height: wpx(64),
+    marginTop: wpx(4),
+    height: wpx(28),
     color: g.colors.white,
     paddingLeft: wpx(16),
-  },
-  signInFaceIdContainer: {
-    marginTop: wpx(24),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: wpx(24),
-    flexWrap: 'wrap',
   },
   buttonsContainer: {
     flexDirection: 'column',
