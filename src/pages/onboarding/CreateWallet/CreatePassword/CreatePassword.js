@@ -84,7 +84,7 @@ const CreatePassword = ({ navigation }) => {
 
   const context = useContext(CreateWalletContext);
 
-  const { handleChange, handleSubmit, values } = useFormik({
+  const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: CreatePasswordForm.initialValue,
     validationSchema: CreatePasswordForm.validationSchema,
     validate: CreatePasswordForm.validate,
@@ -95,6 +95,8 @@ const CreatePassword = ({ navigation }) => {
     validateOnChange: false,
     validateOnBlur: false,
   });
+
+  const getValidationError = key => touched[key] && errors[key];
 
   return (
       <SafeAreaView style={[styles.safeAreaContainer]}>
@@ -117,6 +119,7 @@ const CreatePassword = ({ navigation }) => {
               onSubmitEditing={() => {
                 CreatePasswordForm.refs.confirmPassword.current?.focus();
               }}
+              error={getValidationError('password')}
               returnKeyType="next"
               returnKeyLabel='next'
               style={[styles.input]}
@@ -128,6 +131,7 @@ const CreatePassword = ({ navigation }) => {
               autoCapitalize='none'
               value={values.confirmPassword}
               onChangeText={handleChange('confirmPassword')}
+              error={getValidationError('confirmPassword')}
               returnKeyType="done"
               returnKeyLabel='done'
               style={[styles.input]}
