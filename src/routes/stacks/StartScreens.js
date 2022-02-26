@@ -5,6 +5,7 @@ import Onboarding from 'src/pages/onboarding';
 import Landing from 'src/pages/onboarding/Landing';
 import CreateWallet from 'src/pages/onboarding/CreateWallet';
 import ImportSeed from 'src/pages/onboarding/ImportSeed';
+import ImportPrivateKey from 'src/pages/onboarding/ImportPrivateKey';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const StartScreens = () => (
     <Stack.Screen name="Landing" component={Landing} options={customOptions} />
     <Stack.Screen name="CreateWallet" component={CreateWallet} />
     <Stack.Screen name="ImportSeed" component={ImportSeed} />
+    <Stack.Screen name="ImportPrivateKey" component={ImportPrivateKey} />
   </Stack.Navigator>
 );
 
