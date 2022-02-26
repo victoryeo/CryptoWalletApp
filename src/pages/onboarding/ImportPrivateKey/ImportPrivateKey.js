@@ -23,7 +23,6 @@ const ImportPrivateKey = ({ navigation }) => {
   };
 
   const handleFormSubmission = value => {
-    console.log(value.privateKey);
     let privateKey = value.privateKey;
 
     // Call API with the seed phrase
