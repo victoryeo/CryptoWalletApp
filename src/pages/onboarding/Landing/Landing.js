@@ -29,6 +29,11 @@ const Landing = ({ navigation }) => {
             label="Import Using Seed Phrase"
             onPress={() => navigation.navigate('ImportSeed')}
           />
+          <View style={styles.space} />
+          <Button
+            label="Import Using Private Key"
+            onPress={() => navigation.navigate('ImportPrivateKey')}
+          />
         </View>
       </SafeAreaView>
     </ImageBackground>
