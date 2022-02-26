@@ -109,9 +109,48 @@ function* importFromSeedPhrase(action) {
     }
 }
 
+const addAccountFromPrivateKey = async(  
+    privateKey) => {
+
+  // private key always start with 0x
+  privateKey = '0x'+privateKey;
+
+  // Add privateKey to Web3 Wallet
+  const account = web3Client.addAccountToWallet({ privateKey });
+  console.log(account)
+
+  // Encrypt privateKey
+  let encryptedPrivateKey = '';
+  const securePhrase = await getSecretPassword();
+  if (securePhrase) {
+    const encrypted = await CryptoJS.AES.encrypt(privateKey, securePhrase);
+    encryptedPrivateKey = encrypted.toString();
+  }
+  const accountAddress = account.address;
+
+  // return an object to called
+  return {accountAddress, encryptedPrivateKey};
+}
+
+function* importFromPrivateKey(action) {
+  // Create secret for encrypting privateKey
+  setSecretPassword();
+  try {
+    const privateKey = action.payload.token;
+
+    const accountCreated = yield addAccountFromPrivateKey(privateKey);
+
+    console.log('importFromPrivateKey:', { privateKey, accountCreated });
+
+  } catch (err) {
+    console.log('importFromPrivateKey error:', err);
+  }
+}
+
 export default function* walletSaga() {
   yield all([
     yield takeEvery(walletActions.CREATE_WALLET, createWallet),
     yield takeEvery(walletActions.IMPORT_WALLET, importFromSeedPhrase),
+    yield takeEvery(walletActions.IMPORT_PRIVATE_KEY, importFromPrivateKey),
   ]);
 }
