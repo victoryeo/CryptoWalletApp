@@ -18,6 +18,7 @@
     "@reduxjs/toolkit": "^1.7.2",
     "@tradle/react-native-http": "^2.0.0",
     "assert": "^2.0.0",
+    "axios": "^0.26.0",
     "browserify-zlib": "~0.1.4",
     "console-browserify": "^1.1.0",
     "constants-browserify": "^1.0.0",
