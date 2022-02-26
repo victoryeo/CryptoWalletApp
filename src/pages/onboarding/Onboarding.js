@@ -2,10 +2,9 @@ import React, { useRef, useState } from 'react';
 import { Text, View, Image, ImageBackground, Dimensions } from 'react-native';
 import Button from 'src/components/Button';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { SafeAreaView } from '../../components';
-import navigationPropTypes from '../../utils/commonPropTypes'
-import bgMain from '../../assets/img/background/splash.jpg';
-import cryptoLogo from '../../assets/img/icon/cryptoIcon.png';
+import { SafeAreaView } from 'src/components';
+import navigationPropTypes from 'src/utils/commonPropTypes'
+import bgMain from 'src/assets/img/background/splash.jpg';
 import styles from './Onboarding.css';
 import data from './OnboardingRotation';
 
