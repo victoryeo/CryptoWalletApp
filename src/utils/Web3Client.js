@@ -25,6 +25,15 @@ class Web3Client {
     const account = this.web3Instance.eth.accounts.privateKeyToAccount(privateKey);
     this.web3Instance.eth.accounts.wallet.add(account);
   }
+
+  async getAccountBalance(address) {
+    return await this.web3Instance.eth.getBalance(address);
+  }  
+  
+  async getGasPrice() {
+    return await this.web3Instance.eth.getGasPrice();
+  }
+
 }
 
 export default Web3Client;
