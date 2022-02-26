@@ -27,6 +27,7 @@ const wallet = createSlice({
     ADD_ACCOUNT: (state, action) => {
       state.accounts = [...state.accounts, action.payload];
     },
+    IMPORT_WALLET: () => {},
   }
 })
 
