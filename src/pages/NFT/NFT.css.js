@@ -25,10 +25,9 @@ export default StyleSheet.create({
   bgContainer: {
     flex: 1,
   },
-  creditCard: {
-    marginVertical: wpx(6),
-    marginHorizontal: MARGIN_HOR,
-    width: wp(100) - MARGIN_HOR * 2,
+  logo: {
+    width: 66,
+    height: 58,
   },
   sectionBalance: {
     marginHorizontal: g.constant.SIDE_MARGIN,
