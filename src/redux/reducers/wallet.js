@@ -29,6 +29,7 @@ const wallet = createSlice({
       state.accounts = [...state.accounts, action.payload];
     },
     IMPORT_WALLET: () => {},
+    IMPORT_PRIVATE_KEY: () => {},
     SET_CURRENT_ACCOUNT: (state, action) => {
       state.currentAccount = {
         ...action.payload,
