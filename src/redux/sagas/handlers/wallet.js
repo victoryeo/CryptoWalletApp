@@ -81,6 +81,7 @@ function* createWallet(data) {
     yield put(walletActions.SET_PASSWORD(data.payload.password));
     yield put(walletActions.SET_SEED_PHRASES(seedPhraseList));
     yield put(walletActions.ADD_ACCOUNT(accountCreated));
+    yield put(walletActions.SET_CURRENT_ACCOUNT(accountCreated));
     yield call(navigate, 'SecureYourWallet');    
   } catch (err) {
     console.log('CreateWallet error:', err);
@@ -99,6 +100,8 @@ function* importFromSeedPhrase(action) {
       console.log('importFromSeedPhrase:', { seedPhrase, seedPhraseList, accountCreated });
 
       yield put(walletActions.SET_SEED_PHRASES(seedPhraseList));
+      yield put(walletActions.ADD_ACCOUNT(accountCreated));
+      yield put(walletActions.SET_CURRENT_ACCOUNT(accountCreated));
       yield put(authActions.SIGN_IN());
 
     } catch (err) {
