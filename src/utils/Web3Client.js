@@ -24,6 +24,7 @@ class Web3Client {
     console.log('addAccountToWallet '+ privateKey)
     const account = this.web3Instance.eth.accounts.privateKeyToAccount(privateKey);
     this.web3Instance.eth.accounts.wallet.add(account);
+    return account;
   }
 
   async getAccountBalance(address) {
