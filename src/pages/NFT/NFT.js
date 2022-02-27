@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import SafeAreaView from 'src/components/SafeAreaView';
 import Selectors from '@crypto-redux/selectors';
 import axios from 'axios';
-import { getAccountBalance, getGasPrice } from 'utils/joWeb3Client.js';
+
+import { getGasPrice } from 'utils/joWeb3Client.js';
 import styles from './NFT.css.js';
 
 const NFT = ({ navigation }) => {
@@ -18,7 +19,7 @@ const NFT = ({ navigation }) => {
       const config = {
         headers: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36', 'referer':url},
         params: {
-          owner: "0x161a244E7d840F3b2626F54EcA61Eae6787394Ec"
+          owner: currentAccount.accountAddress
         },
       }
       let resp = await axios.get(url, config);
@@ -40,6 +41,10 @@ const NFT = ({ navigation }) => {
 
   return (
     <SafeAreaView style={[styles.bgContainer]}>
+      <ScrollView
+        contentContainerStyle={[styles.contentContainer]}
+        bounces={false}
+      >
       <View style={[styles.container]}>
       
         <Text style={[styles.bigwords]}>NFT owned by</Text>
@@ -50,8 +55,8 @@ const NFT = ({ navigation }) => {
           source={{uri: imageURI}}
           style={styles.logo}
         /> 
-
       </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
