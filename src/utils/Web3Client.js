@@ -1,6 +1,8 @@
 import Web3 from 'web3';
+import {API_KEY} from "@env";
 
-const rinkeby = "https://eth-rinkeby.alchemyapi.io/v2/IoSmtVVXenKJ8wZRNAAt2HyjB--2X0xb"
+console.log(API_KEY)
+const rinkeby = `https://eth-rinkeby.alchemyapi.io/v2/${API_KEY}`
 
 class Web3Client {
   constructor() {
