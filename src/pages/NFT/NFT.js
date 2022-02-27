@@ -5,15 +5,15 @@ import SafeAreaView from 'src/components/SafeAreaView';
 import Selectors from '@crypto-redux/selectors';
 import axios from 'axios';
 import { Tile } from 'react-native-elements';
-import { getGasPrice } from 'utils/joWeb3Client.js';
+import { getNFTAsset } from 'src/utils/OpenseaClientFunc';
 import styles from './NFT.css.js';
+import {TOKEN_ADDRESS} from "@env";
 
 const NFT = ({ navigation }) => {
   const currentAccount = useSelector(Selectors.currentAccount);
   const [id, setId] = useState(0);
   const [imageURI, setImageURI] = useState(null);
   const [desc, setDesc] = useState(null);
-  const [gasPrice, setGasPrice] = useState(0);
   useEffect(() => {
     const fetchNFT = async() => {
       const url = 'https://api.opensea.io/api/v1/assets'
@@ -34,13 +34,11 @@ const NFT = ({ navigation }) => {
     }
     fetchNFT().catch(console.error)
 
-    const fetchGasPrice = async() => {
-      let data = await getGasPrice();
-      // 1GWEI = 10^9 wei
-      data = data / 1e9;
-      setGasPrice(data)
+    const fetchContractAsset = async() => {
+      let data = await getNFTAsset(TOKEN_ADDRESS);
+      console.log(data)
     }
-    fetchGasPrice().catch(console.error)
+    fetchContractAsset().catch(console.error)
   }, []);
 
   return (
