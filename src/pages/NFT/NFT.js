@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import SafeAreaView from 'src/components/SafeAreaView';
 import Selectors from '@crypto-redux/selectors';
 import axios from 'axios';
-
+import { Tile } from 'react-native-elements';
 import { getGasPrice } from 'utils/joWeb3Client.js';
 import styles from './NFT.css.js';
 
@@ -12,6 +12,7 @@ const NFT = ({ navigation }) => {
   const currentAccount = useSelector(Selectors.currentAccount);
   const [id, setId] = useState(0);
   const [imageURI, setImageURI] = useState(null);
+  const [desc, setDesc] = useState(null);
   const [gasPrice, setGasPrice] = useState(0);
   useEffect(() => {
     const fetchNFT = async() => {
@@ -29,6 +30,7 @@ const NFT = ({ navigation }) => {
       console.log(resp.data.assets[0].image_url)
       setId(resp.data.assets[0].id);
       setImageURI(resp.data.assets[0].image_url);
+      setDesc(resp.data.assets[0].description);
     }
     fetchNFT().catch(console.error)
 
@@ -43,6 +45,7 @@ const NFT = ({ navigation }) => {
 
   return (
     <SafeAreaView style={[styles.bgContainer]}>
+      <View style={{ alignItems: 'center' }}>
       <ScrollView
         contentContainerStyle={[styles.contentContainer]}
         bounces={false}
@@ -51,14 +54,20 @@ const NFT = ({ navigation }) => {
       
         <Text style={[styles.bigwords]}>NFT owned by</Text>
         <Text style={[styles.words]}>{currentAccount.accountAddress}</Text>
-       
-        <Text style={[styles.words]}>ID: {id} </Text>   
-        <Image
-          source={{uri: imageURI}}
-          style={styles.logo}
-        /> 
+        <View style={styles.space}/>
+        <Tile
+         imageSrc={{uri:imageURI}}
+         title={desc}
+         titleStyle={{ fontSize: 20, color: 'white', textAlign: 'center', paddingBottom: 1 }}
+         activeOpacity={1}
+         width={280}
+         style={{ paddingBottom: 10, paddingTop: 10 }}
+         >
+          <Text style={[styles.words]}>ID: {id} </Text>  
+        </Tile>
       </View>
       </ScrollView>
+      </View>
     </SafeAreaView>
   )
 }

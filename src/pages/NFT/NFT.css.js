@@ -9,7 +9,7 @@ export default StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingHorizontal: g.constant.SIDE_MARGIN_NARROW,
-    paddingTop: wpx(54),
+    paddingTop: wpx(24),
   },
   words: {
     color: g.colors.white,
@@ -29,12 +29,11 @@ export default StyleSheet.create({
     width: 66,
     height: 58,
   },
-  sectionBalance: {
-    marginHorizontal: g.constant.SIDE_MARGIN,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  contentContainer: {
+    paddingVertical: 20
   },
-  accountNumber: {
-    marginHorizontal: g.constant.SIDE_MARGIN,
-  }
+  space: {
+    width: 20,
+    height: 20,
+  },
 });
