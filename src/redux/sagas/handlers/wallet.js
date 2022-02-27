@@ -6,7 +6,7 @@ import { authActions } from '@crypto-redux/reducers/auth';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import bip39 from 'react-native-bip39';
 import { hdkey } from 'ethereumjs-wallet';
-import { web3Client } from 'src/utils/initWeb3Client';
+import { web3Client } from 'utils/Web3ClientFunc';
 
 const CryptoJS = require("crypto-js");
 

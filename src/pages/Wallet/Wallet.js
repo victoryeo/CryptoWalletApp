@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import SafeAreaView from 'src/components/SafeAreaView';
 import Selectors from '@crypto-redux/selectors';
 
-import { getAccountBalance, getGasPrice } from 'utils/joWeb3Client.js';
+import { getAccountBalance, getGasPrice } from 'utils/Web3ClientFunc.js';
 import styles from './Wallet.css.js';
 
 const Wallet = ({ navigation }) => {

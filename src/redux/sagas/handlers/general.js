@@ -1,7 +1,7 @@
 import { call, put, takeEvery, all, select, delay } from 'redux-saga/effects';
 import { REHYDRATE } from 'redux-persist';
 import { authActions } from 'src/redux/reducers/auth';
-import { initWeb3Client } from 'src/utils/initWeb3Client';
+import { initWeb3Client } from 'src/utils/Web3ClientFunc';
 import { initOpenseaClient } from 'src/utils/OpenseaClientFunc';
 
 function* initOpenseaInstance() {
