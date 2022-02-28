@@ -28,4 +28,9 @@ export default StyleSheet.create({
     marginTop: wpx(8),
     fontSize: 20,
   },
+  words: {
+    color: 'white',
+    textAlign: 'center',
+    marginTop: wpx(8),
+  },
 });
