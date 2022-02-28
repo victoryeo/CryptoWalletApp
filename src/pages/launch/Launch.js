@@ -1,8 +1,8 @@
 import React from 'react';
 import { ImageBackground } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
-import { Loader } from '../../components';
-import SplashImage from '../../assets/img/background/splash.jpg';
+import SplashImage from 'src/assets/img/background/splash.jpg';
 
 import s from './Launch.css';
 
@@ -12,7 +12,10 @@ const Launch = () => {
       style={s.container}
       source={SplashImage}
     >
-      <Loader size='small' />
+    <ActivityIndicator
+      color='#999999'
+      size='small'
+    />
     </ImageBackground>
   );
 };
