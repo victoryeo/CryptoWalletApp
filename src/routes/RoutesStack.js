@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { initNavigator } from '../utils/NavigationService';
 import Launch from '../pages/launch';
 import { MainTabs, StartScreens } from './stacks';
+import Send from 'src/pages/Send';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ const RoutesStack = () => {
             animationTypeForReplace: 'push',
           }}
         />
+        <Stack.Screen name="Send" component={Send} />
       </>
     );
   };
