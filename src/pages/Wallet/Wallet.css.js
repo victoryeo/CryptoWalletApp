@@ -25,10 +25,14 @@ export default StyleSheet.create({
   bgContainer: {
     flex: 1,
   },
-  creditCard: {
-    marginVertical: wpx(6),
-    marginHorizontal: MARGIN_HOR,
-    width: wp(100) - MARGIN_HOR * 2,
+  buttonsContainer: {
+    flexDirection: 'column',
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+    paddingBottom: wpx(50),
+  },
+  row: {
+    flexDirection: 'row',
   },
   sectionBalance: {
     marginHorizontal: g.constant.SIDE_MARGIN,

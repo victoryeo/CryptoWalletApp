@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import SafeAreaView from 'src/components/SafeAreaView';
 import Selectors from '@crypto-redux/selectors';
 
+import Button from 'src/components/Button';
 import { getAccountBalance, getGasPrice } from 'utils/Web3ClientFunc.js';
 import styles from './Wallet.css.js';
 
@@ -37,7 +38,10 @@ const Wallet = ({ navigation }) => {
         <Text style={[styles.bigwords]}>Gas price: {gasPrice} Gwei</Text>
         <Text style={[styles.bigwords]}>Account Information</Text>
         <Text style={[styles.words]}>address: {currentAccount.accountAddress}</Text>
-        <Text style={[styles.words]}>balance: {bala} ETH</Text>        
+        <Text style={[styles.words]}>balance: {bala} ETH</Text> 
+        <View style={styles.buttonsContainer}>
+            <Button label="Send" onPress={() => navigation.navigate('Send')} />
+          </View>       
       </View>
     </SafeAreaView>
   )
