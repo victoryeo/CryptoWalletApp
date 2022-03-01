@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import SafeAreaView from 'src/components/SafeAreaView';
 import Header from 'src/components/Header';
+import TextInput from 'src/components/TextInput';
+import Button from 'src/components/Button';
 import styles from './Send.css';
 import globalS from 'src/assets/globalStyle';
 import { pop } from 'utils/NavigationService';
-import TextInput from 'src/components/TextInput';
 
 const Send = ({ navigation }) => {
   const [toAddress, setToAddress] = useState(null);
+  const [toAmount, setToAmount] = useState(null);
+
+  const handleSend = () => {
+    console.log('handleSend ' + toAddress + ' ' + toAmount)
+  }
 
   return (
     <SafeAreaView style={[styles.container]}>
@@ -23,10 +29,30 @@ const Send = ({ navigation }) => {
         value={toAddress}
         onChangeText={setToAddress}
         showScan
+        returnKeyType="next"
+        returnKeyLabel="next"
+        style={[styles.input]}
+      />
+
+      <TextInput
+        placeholder="Amount"
+        label="Amount"
+        value={toAmount}
+        onChangeText={setToAmount}
+        showScan
+        keyboardType='numeric'
         returnKeyType="done"
         returnKeyLabel="done"
         style={[styles.input]}
       />
+      <View style={styles.buttonsContainer}>
+        <Button
+          label="Next"
+          onPress={() => {
+            handleSend();
+          }}
+        />
+      </View>
     </SafeAreaView>)
 }
 
