@@ -31,11 +31,10 @@ const CreateWallet = ({ navigation }) => {
       navigation.navigate('WriteDownSeedPhrase');
     },
     handleSkipAccountSecurityButtonClick: () => {
-      dispatch(modalActions.TOGGLE_GLOBAL_LOADER(true));
       setTimeout(() => {
         setCreateSeedPhraseSuccessful(true);
         navigation.navigate('ConfirmSeedPhrase');
-        dispatch(modalActions.TOGGLE_GLOBAL_LOADER(false));
+        
       }, 2000);
     },
     handleWriteDownSeedPhraseContinueClick: () => {

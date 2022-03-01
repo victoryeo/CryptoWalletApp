@@ -1,7 +1,6 @@
 import { call, put, takeEvery, all, select } from 'redux-saga/effects';
 import { navigate } from 'utils/NavigationService';
 import { walletActions } from '@crypto-redux/reducers/wallet';
-import { modalActions } from '@crypto-redux/reducers/modal';
 import { authActions } from '@crypto-redux/reducers/auth';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import bip39 from 'react-native-bip39';
@@ -69,7 +68,6 @@ const addAccount = async(
 }
 
 function* createWallet(data) {
-  yield put(modalActions.TOGGLE_GLOBAL_LOADER(true));
 
   // Create secret for encrypting privateKey
   setSecretPassword();
