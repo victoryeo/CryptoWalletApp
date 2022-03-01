@@ -46,13 +46,19 @@ class Web3Client {
      'to': to,
      'value': amount,
      'gas': 5000000,
-     'maxFeePerGas': 1000000108,
      'nonce': nonce,
     };
 
-    //const signedTx = await this.web3Instance.eth.accounts.signTransaction(
-    //  transaction, PRIVATE_KEY);
+    const signedTx = await this.web3Instance.eth.accounts.signTransaction(
+      transaction, pk);
+    console.log(signedTx)
 
+    try {
+      const hash = await this.web3Instance.eth.sendSignedTransaction(signedTx.rawTransaction) 
+      console.log("The hash of your transaction is: ", hash, "\n Check Alchemy's Mempool to view the status of your transaction!")
+    } catch (error) {
+      console.log("Something went wrong while submitting your transaction:", error)
+    }
   }
 }
 
