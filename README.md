@@ -12,3 +12,6 @@ then import the generated shim.js file in App.js
 #### Use Opensea SDK and Opensea API
 We call the Opensea API to get assets info.  
 We call the Opensea javascript SDK to fetch an asset.
+
+##### App Screenshot
+![Screenshot](https://ibb.co/DQDng4g)
