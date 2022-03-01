@@ -14,4 +14,4 @@ We call the Opensea API to get assets info.
 We call the Opensea javascript SDK to fetch an asset.
 
 ##### App Screenshot
-![Screenshot](https://ibb.co/DQDng4g)
+![Screenshot](https://i.ibb.co/vkx8v1v/CWA-screen1.png)
