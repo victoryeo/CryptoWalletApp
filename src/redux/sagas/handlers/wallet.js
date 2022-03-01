@@ -7,6 +7,7 @@ import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import bip39 from 'react-native-bip39';
 import { hdkey } from 'ethereumjs-wallet';
 import { web3Client } from 'src/utils/Web3ClientFunc';
+import Selectors from '@crypto-redux/selectors';
 
 const CryptoJS = require("crypto-js");
 
@@ -158,8 +159,8 @@ function* sendAmount(action) {
       to,
       amount,
     } = action.payload;
-    console.log(from, to, amount)
-    web3Client.sendAmount();
+    const currentAccount = yield select(Selectors.currentAccount);
+    web3Client.sendAmount(from, to, amount, currentAccount);
   } catch (err) {
     console.log('sendAmount error:', err);
   }

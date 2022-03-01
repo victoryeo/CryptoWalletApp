@@ -37,8 +37,24 @@ class Web3Client {
     return await this.web3Instance.eth.getGasPrice();
   }
 
-  async sendAmount() {
-    console.log('sendAmount')
+  async sendAmount(from, to, amount, curr)
+  {
+    console.log('sendAmount ', from, to, amount)
+    const nonce = await this.web3Instance.eth.getTransactionCount(from, 'latest'); 
+
+    const transaction = {
+     'to': to,
+     'value': amount,
+     'gas': 5000000,
+     'maxFeePerGas': 1000000108,
+     'nonce': nonce,
+    };
+
+    console.log(curr)
+
+    //const signedTx = await this.web3Instance.eth.accounts.signTransaction(
+    //  transaction, PRIVATE_KEY);
+
   }
 }
 
