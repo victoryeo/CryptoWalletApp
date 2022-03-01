@@ -160,7 +160,14 @@ function* sendAmount(action) {
       amount,
     } = action.payload;
     const currentAccount = yield select(Selectors.currentAccount);
-    web3Client.sendAmount(from, to, amount, currentAccount);
+    const secretPassword = yield call(getSecretPassword);
+    // decrypt the enc private key
+    const bytes = yield CryptoJS.AES.decrypt(
+      currentAccount.encryptedPrivateKey,
+      secretPassword);
+    const privateKey = bytes.toString(CryptoJS.enc.Utf8);
+    // call web3Client 
+    web3Client.sendAmount(from, to, amount, privateKey);
   } catch (err) {
     console.log('sendAmount error:', err);
   }
