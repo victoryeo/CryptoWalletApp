@@ -33,4 +33,11 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginTop: wpx(8),
   },
+  input: {
+    backgroundColor: 'gray',
+    marginTop: wpx(4),
+    height: wpx(28),
+    color: 'white',
+    paddingLeft: wpx(16),
+  },
 });
