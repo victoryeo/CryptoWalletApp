@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { Text, View } from 'react-native';
 import SafeAreaView from 'src/components/SafeAreaView';
 import Header from 'src/components/Header';
@@ -9,8 +9,11 @@ import styles from './Send.css';
 import globalS from 'src/assets/globalStyle';
 import { pop } from 'utils/NavigationService';
 import Selectors from '@crypto-redux/selectors';
+import { walletActions } from '@crypto-redux/reducers/wallet';
 
 const Send = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   const [toAddress, setToAddress] = useState(null);
   const [toAmount, setToAmount] = useState(null);
   const currentAccount = useSelector(Selectors.currentAccount);
@@ -18,6 +21,13 @@ const Send = ({ navigation }) => {
   const handleSend = () => {
     console.log('send to ' + toAddress + ' amount ' + toAmount)
     console.log(currentAccount.accountAddress)
+
+    dispatch(walletActions.SEND({
+      from: currentAccount.accountAddress,
+      to: toAddress, 
+      amount: toAmount 
+    }));
+
   }
 
   return (
