@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Text, View } from 'react-native';
 import SafeAreaView from 'src/components/SafeAreaView';
 import Header from 'src/components/Header';
@@ -7,13 +8,16 @@ import Button from 'src/components/Button';
 import styles from './Send.css';
 import globalS from 'src/assets/globalStyle';
 import { pop } from 'utils/NavigationService';
+import Selectors from '@crypto-redux/selectors';
 
 const Send = ({ navigation }) => {
   const [toAddress, setToAddress] = useState(null);
   const [toAmount, setToAmount] = useState(null);
+  const currentAccount = useSelector(Selectors.currentAccount);
 
   const handleSend = () => {
-    console.log('handleSend ' + toAddress + ' ' + toAmount)
+    console.log('send to ' + toAddress + ' amount ' + toAmount)
+    console.log(currentAccount.accountAddress)
   }
 
   return (
@@ -47,7 +51,7 @@ const Send = ({ navigation }) => {
       />
       <View style={styles.buttonsContainer}>
         <Button
-          label="Next"
+          label="Send Now"
           onPress={() => {
             handleSend();
           }}
