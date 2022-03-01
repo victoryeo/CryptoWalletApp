@@ -16,7 +16,7 @@ const ImportPrivateKey = ({ navigation }) => {
   const dispatch = useDispatch();
   const form = {
     initialValue: {
-      seed: '',
+      privateKey: '',
       password: '',
       confirmPassword: '',
     },
@@ -48,8 +48,9 @@ const ImportPrivateKey = ({ navigation }) => {
           <View>
             <Text style={[styles.words]}>Enter Private Key</Text>
             <TextInput
+              secureTextEntry={true}
               autoCapitalize='none'
-              value={values.seed}
+              value={values.privateKey}
               onChangeText={handleChange('privateKey')}
               onSubmitEditing={() => form.refs.password.current?.focus()}
               showScan
