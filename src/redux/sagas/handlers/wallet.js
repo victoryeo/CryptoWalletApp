@@ -6,7 +6,7 @@ import { authActions } from '@crypto-redux/reducers/auth';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import bip39 from 'react-native-bip39';
 import { hdkey } from 'ethereumjs-wallet';
-import { web3Client } from 'utils/Web3ClientFunc';
+import { web3Client } from 'src/utils/Web3ClientFunc';
 
 const CryptoJS = require("crypto-js");
 
@@ -151,10 +151,25 @@ function* importFromPrivateKey(action) {
   }
 }
 
+function* sendAmount(action) {
+  try {
+    const {
+      from,
+      to,
+      amount,
+    } = action.payload;
+    console.log(from, to, amount)
+    web3Client.sendAmount();
+  } catch (err) {
+    console.log('sendAmount error:', err);
+  }
+}
+
 export default function* walletSaga() {
   yield all([
     yield takeEvery(walletActions.CREATE_WALLET, createWallet),
     yield takeEvery(walletActions.IMPORT_WALLET, importFromSeedPhrase),
     yield takeEvery(walletActions.IMPORT_PRIVATE_KEY, importFromPrivateKey),
+    yield takeEvery(walletActions.SEND, sendAmount),
   ]);
 }

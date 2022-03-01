@@ -37,7 +37,7 @@ const wallet = createSlice({
       };
     },
     SEND: (state, action) => {
-      state.sendSuccess = false;
+      state.sendSuccess = true;
     },  
   }
 })
