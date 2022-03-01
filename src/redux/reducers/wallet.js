@@ -5,6 +5,7 @@ const initialState = {
   seedPhrases: null,
   accounts: [],
   currentAccount: null,
+  sendSuccess: false,
 }
 
 const wallet = createSlice({
@@ -35,6 +36,9 @@ const wallet = createSlice({
         ...action.payload,
       };
     },
+    SEND: (state, action) => {
+      state.sendSuccess = false;
+    },  
   }
 })
 
