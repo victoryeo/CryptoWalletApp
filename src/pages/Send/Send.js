@@ -20,8 +20,6 @@ const Send = ({ navigation }) => {
 
   const handleSend = () => {
     console.log('send to ' + toAddress + ' amount ' + toAmount)
-    console.log(currentAccount.accountAddress)
-
     dispatch(walletActions.SEND({
       from: currentAccount.accountAddress,
       to: toAddress, 

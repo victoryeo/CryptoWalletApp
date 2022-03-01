@@ -37,6 +37,9 @@ class Web3Client {
     return await this.web3Instance.eth.getGasPrice();
   }
 
+  async sendAmount() {
+    console.log('sendAmount')
+  }
 }
 
 export default Web3Client;
