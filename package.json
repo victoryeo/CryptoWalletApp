@@ -71,16 +71,20 @@
     "@babel/core": "^7.17.5",
     "@babel/runtime": "^7.17.2",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@tsconfig/react-native": "^2.0.2",
+    "@types/jest": "^29.1.2",
+    "@types/react-native": "^0.70.4",
+    "@types/react-native-vector-icons": "^6.4.12",
+    "@types/react-test-renderer": "^18.0.0",
     "babel-cli": "^6.26.0",
-    "babel-jest": "^26.6.3",
+    "babel-jest": "^29.0.0",
     "babel-plugin-root-import": "^6.6.0",
     "eslint": "7.14.0",
-    "jest": "^26.6.3",
+    "jest": "^29.0.0",
+    "jest-transform-stub": "^2.0.0",
     "metro-react-native-babel-preset": "^0.66.2",
-    "react-test-renderer": "17.0.2"
-  },
-  "jest": {
-    "preset": "react-native"
+    "react-test-renderer": "^17.0.2",
+    "ts-jest": "^29.0.3"
   },
   "react-native": {
     "zlib": "browserify-zlib",
@@ -133,5 +137,28 @@
     "tty": "tty-browserify",
     "vm": "vm-browserify",
     "tls": false
+  },
+  "jest": {
+    "setupFiles": [
+      "./__testsetup__/jest.setup.js"
+    ],
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest",
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+      "\\.(css|less)$": "<rootDir>/__testsetup__/assetsTransform.js"
+    },
+    "transformIgnorePatterns": ["<rootDir>/node_modules/"]
   }
 }
