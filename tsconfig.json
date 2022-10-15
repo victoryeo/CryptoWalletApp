@@ -1,0 +1,12 @@
+// prettier-ignore
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",     
+  "compilerOptions": {
+    "types": ["node","jest"],
+    "skipLibCheck": true,
+    "jsx": "react", 
+    "typeRoots": ["./src/types", "node_modules/@types"]                           
+  },
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
+  "include": ["./src/**/*.tsx", "./src/**/*.ts", "__tests__"]
+}
