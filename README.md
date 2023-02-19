@@ -9,7 +9,7 @@ We need to run this command in order to use crypto-js nodeJs module in React Nat
 $ ./node_modules/.bin/rn-nodeify  --install  
 then import the generated shim.js file in App.js  
   
-After that, apply the patch files in patches folder to modify react-native index.js in node_modules  
+After that, apply the patch files in patches folder to modify react-native, react-native-os, react-native-tcp in node_modules  
 $ npx patch-package
 
 #### Use Opensea SDK and Opensea API
