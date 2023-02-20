@@ -6,7 +6,7 @@ import Selectors from '@crypto-redux/selectors';
 import axios from 'axios';
 import { Tile } from 'react-native-elements';
 import { getNFTAsset } from 'src/utils/OpenseaClientFunc';
-import styles from './NFT.css.js';
+import styles from './NFT.css';
 import {TOKEN_ADDRESS} from "@env";
 
 const NFT = ({ navigation }) => {
@@ -26,11 +26,11 @@ const NFT = ({ navigation }) => {
         },
       }
       let resp = await axios.get(url, config);
-      console.log(resp.data.assets[0].id)
-      console.log(resp.data.assets[0].image_url)
-      setId(resp.data.assets[0].id);
-      setImageURI(resp.data.assets[0].image_url);
-      setDesc(resp.data.assets[0].description);
+      console.log(resp.data?.assets[0]?.id)
+      console.log(resp.data?.assets[0]?.image_url)
+      setId(resp.data?.assets[0]?.id);
+      setImageURI(resp.data?.assets[0]?.image_url);
+      setDesc(resp.data?.assets[0]?.description);
     }
     fetchNFT().catch(console.error)
 

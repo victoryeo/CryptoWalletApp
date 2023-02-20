@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import AD from 'react-native-vector-icons/AntDesign';
 
-import globalS from 'src/assets/globalStyle';
-import { wpx } from 'utils/dimensions';
+import globalS from '../../assets/globalStyle';
+import { wpx } from '../../utils/dimensions';
 import styles from './Header.css';
 
 const ICON_MAP = {
@@ -13,7 +13,7 @@ const ICON_MAP = {
 };
 
 class Header extends Component {
-  renderIcon = (side) => {
+  renderIcon = (side: any) => {
     const iconData = side === 'left' ? this.props.leftIcon : null;
     if (!iconData) {
       return <View style={styles.iconTouch} />;

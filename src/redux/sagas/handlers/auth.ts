@@ -3,7 +3,7 @@ import { call, put, takeEvery, all } from 'redux-saga/effects';
 import { authActions } from '@crypto-redux/reducers/auth';
 import { walletActions } from '@crypto-redux/reducers/wallet';
 
-function* signOut(action) {
+function* signOut(action: any) {
   yield put(walletActions.CLEAN_USER_DATA());
 }
 

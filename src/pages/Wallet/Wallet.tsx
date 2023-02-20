@@ -5,8 +5,8 @@ import SafeAreaView from 'src/components/SafeAreaView';
 import Selectors from '@crypto-redux/selectors';
 
 import Button from 'src/components/Button';
-import { getAccountBalance, getGasPrice } from 'utils/Web3ClientFunc.js';
-import styles from './Wallet.css.js';
+import { getAccountBalance, getGasPrice } from '../../utils/Web3ClientFunc';
+import styles from './Wallet.css';
 
 const Wallet = ({ navigation }) => {
   const currentAccount = useSelector(Selectors.currentAccount);

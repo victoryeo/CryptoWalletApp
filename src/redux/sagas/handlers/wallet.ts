@@ -1,5 +1,5 @@
 import { call, put, takeEvery, all, select } from 'redux-saga/effects';
-import { navigate } from 'utils/NavigationService';
+import { navigate } from '../../../utils/NavigationService';
 import { walletActions } from '@crypto-redux/reducers/wallet';
 import { authActions } from '@crypto-redux/reducers/auth';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
@@ -40,9 +40,14 @@ const generateSeedPhrase = async() => {
   return { seedPhrase, seedPhraseList };
 }
 
+interface AddAccountRetType {
+  accountAddress: string,
+  encryptedPrivateKey: string
+}
+
 const addAccount = async(  
-    seedPhrase,
-    addressIndex = 0) => {
+    seedPhrase: string,
+    addressIndex = 0): Promise<AddAccountRetType> => {
   // generate hdwallet from seed phrase
   const hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(seedPhrase));
 
@@ -67,7 +72,7 @@ const addAccount = async(
   return {accountAddress, encryptedPrivateKey};
 }
 
-function* createWallet(data) {
+function* createWallet(data: any): any {
 
   // Create secret for encrypting privateKey
   setSecretPassword();
@@ -87,7 +92,7 @@ function* createWallet(data) {
   }
 }
 
-function* importFromSeedPhrase(action) {
+function* importFromSeedPhrase(action: any) {
     // Create secret for encrypting privateKey
     setSecretPassword();
 
@@ -109,7 +114,7 @@ function* importFromSeedPhrase(action) {
 }
 
 const addAccountFromPrivateKey = async(  
-    privateKey) => {
+    privateKey: string): Promise<AddAccountRetType> => {
 
   // private key always start with 0x
   privateKey = '0x'+privateKey;
@@ -131,7 +136,7 @@ const addAccountFromPrivateKey = async(
   return {accountAddress, encryptedPrivateKey};
 }
 
-function* importFromPrivateKey(action) {
+function* importFromPrivateKey(action: any) {
   // Create secret for encrypting privateKey
   setSecretPassword();
   try {
@@ -150,7 +155,7 @@ function* importFromPrivateKey(action) {
   }
 }
 
-function* sendAmount(action) {
+function* sendAmount(action: any) {
   try {
     const {
       from,
