@@ -3,9 +3,8 @@ import { REHYDRATE } from 'redux-persist';
 import { authActions } from '../../../redux/reducers/auth';
 import { initWeb3Client } from '../../../utils/Web3ClientFunc';
 import { initOpenseaClient } from '../../../utils/OpenseaClientFunc';
-import { bool } from 'yup';
 
-function* initOpenseaInstance(): boolean {
+function* initOpenseaInstance() {
   try {
     yield initOpenseaClient();
     return true;
@@ -15,7 +14,7 @@ function* initOpenseaInstance(): boolean {
   }
 }
 
-function* initWeb3Instance(): boolean {
+function* initWeb3Instance() {
   try {
     yield initWeb3Client();
     
