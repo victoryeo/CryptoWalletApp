@@ -8,12 +8,13 @@ import { Tile } from 'react-native-elements';
 import { getNFTAsset } from 'src/utils/OpenseaClientFunc';
 import styles from './NFT.css';
 import {TOKEN_ADDRESS} from "@env";
+import { AccountRetType } from '../../redux/sagas/handlers/wallet';
 
-const NFT = ({ navigation }) => {
-  const currentAccount = useSelector(Selectors.currentAccount);
+const NFT = ({ navigation }: any) => {
+  const currentAccount: AccountRetType = useSelector(Selectors.currentAccount);
   const [id, setId] = useState(0);
-  const [imageURI, setImageURI] = useState(null);
-  const [desc, setDesc] = useState(null);
+  const [imageURI, setImageURI] = useState('uri');
+  const [desc, setDesc] = useState('desc');
   useEffect(() => {
     const fetchNFT = async() => {
       const url = 'https://api.opensea.io/api/v1/assets'
