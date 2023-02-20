@@ -20,7 +20,7 @@ const setSecretPassword = async () => {
   }
 }
 
-const getSecretPassword = async () => {
+const getSecretPassword = async (): Promise<string | null> => {
   try {
     const credentials = await getGenericPassword();
     if (!credentials) {
@@ -40,14 +40,14 @@ const generateSeedPhrase = async() => {
   return { seedPhrase, seedPhraseList };
 }
 
-interface AddAccountRetType {
+interface AccountRetType {
   accountAddress: string,
   encryptedPrivateKey: string
 }
 
 const addAccount = async(  
     seedPhrase: string,
-    addressIndex = 0): Promise<AddAccountRetType> => {
+    addressIndex = 0): Promise<AccountRetType> => {
   // generate hdwallet from seed phrase
   const hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(seedPhrase));
 
@@ -99,7 +99,7 @@ function* importFromSeedPhrase(action: any) {
     try {
       const seedPhrase = action.payload.token;
       const seedPhraseList = seedPhrase.split(' ');
-      const accountCreated = yield addAccount(seedPhrase);
+      const accountCreated: AccountRetType = yield addAccount(seedPhrase);
 
       console.log('importFromSeedPhrase:', { seedPhrase, seedPhraseList, accountCreated });
 
@@ -114,7 +114,7 @@ function* importFromSeedPhrase(action: any) {
 }
 
 const addAccountFromPrivateKey = async(  
-    privateKey: string): Promise<AddAccountRetType> => {
+    privateKey: string): Promise<AccountRetType> => {
 
   // private key always start with 0x
   privateKey = '0x'+privateKey;
@@ -142,7 +142,7 @@ function* importFromPrivateKey(action: any) {
   try {
     const privateKey = action.payload.token;
 
-    const accountCreated = yield addAccountFromPrivateKey(privateKey);
+    const accountCreated: AccountRetType = yield addAccountFromPrivateKey(privateKey);
 
     console.log('importFromPrivateKey:', { privateKey, accountCreated });
 
@@ -162,8 +162,8 @@ function* sendAmount(action: any) {
       to,
       amount,
     } = action.payload;
-    const currentAccount = yield select(Selectors.currentAccount);
-    const secretPassword = yield call(getSecretPassword);
+    const currentAccount: AccountRetType = yield select(Selectors.currentAccount);
+    const secretPassword: string | null = yield call(getSecretPassword);
     // decrypt the enc private key
     const bytes = yield CryptoJS.AES.decrypt(
       currentAccount.encryptedPrivateKey,
