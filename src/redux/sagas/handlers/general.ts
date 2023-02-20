@@ -5,9 +5,9 @@ import { initWeb3Client } from '../../../utils/Web3ClientFunc';
 import { initOpenseaClient } from '../../../utils/OpenseaClientFunc';
 import { bool } from 'yup';
 
-function* initOpenseaInstance() {
+function* initOpenseaInstance(): boolean {
   try {
-    initOpenseaClient();
+    yield initOpenseaClient();
     return true;
   } catch (err) {
     console.log('init opensea ' + err);
@@ -15,9 +15,9 @@ function* initOpenseaInstance() {
   }
 }
 
-function* initWeb3Instance(): Generator<never, boolean, unknown> {
+function* initWeb3Instance(): boolean {
   try {
-    initWeb3Client();
+    yield initWeb3Client();
     
     return true;
   } catch (err) {
@@ -27,10 +27,10 @@ function* initWeb3Instance(): Generator<never, boolean, unknown> {
 }
 
 function* initApp() {
-  const web3Connected: any = yield call(initWeb3Instance);
+  const web3Connected: boolean = yield call(initWeb3Instance);
   console.log('web3 connected ' + web3Connected);
 
-  const osConnected: any = yield call(initOpenseaInstance);
+  const osConnected: boolean = yield call(initOpenseaInstance);
   console.log('opensea connected ' + osConnected);
 }
 

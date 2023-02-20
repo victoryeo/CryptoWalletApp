@@ -10,6 +10,11 @@ import Selectors from '@crypto-redux/selectors';
 
 const CryptoJS = require("crypto-js");
 
+export interface AccountRetType {
+  accountAddress: string,
+  encryptedPrivateKey: string
+}
+
 const setSecretPassword = async () => {
   try {
     const secretPassword = Math.random().toString(36).slice(-10);
@@ -38,11 +43,6 @@ const generateSeedPhrase = async() => {
   const seedPhrase = await bip39.generateMnemonic(128);
   const seedPhraseList = seedPhrase.split(" ");
   return { seedPhrase, seedPhraseList };
-}
-
-interface AccountRetType {
-  accountAddress: string,
-  encryptedPrivateKey: string
 }
 
 const addAccount = async(  
@@ -165,7 +165,7 @@ function* sendAmount(action: any) {
     const currentAccount: AccountRetType = yield select(Selectors.currentAccount);
     const secretPassword: string | null = yield call(getSecretPassword);
     // decrypt the enc private key
-    const bytes = yield CryptoJS.AES.decrypt(
+    const bytes: string = yield CryptoJS.AES.decrypt(
       currentAccount.encryptedPrivateKey,
       secretPassword);
     const privateKey = bytes.toString(CryptoJS.enc.Utf8);
