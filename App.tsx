@@ -1,7 +1,6 @@
 import './shim';
 
 import React from 'react';
-import type { Node } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
@@ -9,7 +8,7 @@ import { persistStore } from 'redux-persist';
 import RoutesStack from './src/routes/RoutesStack';
 import store from './src/redux/Store';
 
-const App: () => Node = () => {
+const App = () => {
   const persistor = persistStore(store);
 
   return (

@@ -2,8 +2,9 @@ import Web3 from 'web3';
 import { OpenSeaPort, Network } from 'opensea-js';
 
 class OpenseaClient {
+  openseaport : OpenSeaPort
   constructor() {
-    this.openseaport = null;
+    this.openseaport = <OpenSeaPort>{}
     this.init();
   }
 
@@ -22,7 +23,7 @@ class OpenseaClient {
   }
 
   // Get assets
-  async getOpenSeaAssets(address) {
+  async getOpenSeaAssets(address: any) {
     const assets = await this.openseaport.api.getAsset({
       tokenAddress: address,
       tokenId: null

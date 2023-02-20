@@ -9,7 +9,9 @@ export const actions = {
 };
 
 // Reducers
-export default combineReducers({
+const reducer =  combineReducers({
   wallet: Wallet.reducer,
   auth: Auth.reducer,
 });
+
+export default reducer;

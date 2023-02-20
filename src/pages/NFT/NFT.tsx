@@ -6,14 +6,15 @@ import Selectors from '@crypto-redux/selectors';
 import axios from 'axios';
 import { Tile } from 'react-native-elements';
 import { getNFTAsset } from 'src/utils/OpenseaClientFunc';
-import styles from './NFT.css.js';
+import styles from './NFT.css';
 import {TOKEN_ADDRESS} from "@env";
+import { AccountRetType } from '../../redux/sagas/handlers/wallet';
 
-const NFT = ({ navigation }) => {
-  const currentAccount = useSelector(Selectors.currentAccount);
+const NFT = ({ navigation }: any) => {
+  const currentAccount: AccountRetType = useSelector(Selectors.currentAccount);
   const [id, setId] = useState(0);
-  const [imageURI, setImageURI] = useState(null);
-  const [desc, setDesc] = useState(null);
+  const [imageURI, setImageURI] = useState('uri');
+  const [desc, setDesc] = useState('desc');
   useEffect(() => {
     const fetchNFT = async() => {
       const url = 'https://api.opensea.io/api/v1/assets'
@@ -26,11 +27,11 @@ const NFT = ({ navigation }) => {
         },
       }
       let resp = await axios.get(url, config);
-      console.log(resp.data.assets[0].id)
-      console.log(resp.data.assets[0].image_url)
-      setId(resp.data.assets[0].id);
-      setImageURI(resp.data.assets[0].image_url);
-      setDesc(resp.data.assets[0].description);
+      console.log(resp.data?.assets[0]?.id)
+      console.log(resp.data?.assets[0]?.image_url)
+      setId(resp.data?.assets[0]?.id);
+      setImageURI(resp.data?.assets[0]?.image_url);
+      setDesc(resp.data?.assets[0]?.description);
     }
     fetchNFT().catch(console.error)
 

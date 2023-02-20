@@ -1,12 +1,12 @@
 import { call, put, takeEvery, all, select, delay } from 'redux-saga/effects';
 import { REHYDRATE } from 'redux-persist';
-import { authActions } from 'src/redux/reducers/auth';
-import { initWeb3Client } from 'src/utils/Web3ClientFunc';
-import { initOpenseaClient } from 'src/utils/OpenseaClientFunc';
+import { authActions } from '../../../redux/reducers/auth';
+import { initWeb3Client } from '../../../utils/Web3ClientFunc';
+import { initOpenseaClient } from '../../../utils/OpenseaClientFunc';
 
 function* initOpenseaInstance() {
   try {
-    initOpenseaClient();
+    yield initOpenseaClient();
     return true;
   } catch (err) {
     console.log('init opensea ' + err);
@@ -16,7 +16,8 @@ function* initOpenseaInstance() {
 
 function* initWeb3Instance() {
   try {
-    initWeb3Client();
+    yield initWeb3Client();
+    
     return true;
   } catch (err) {
     console.log('init web3 ' + err);
@@ -25,10 +26,10 @@ function* initWeb3Instance() {
 }
 
 function* initApp() {
-  const web3Connected = yield call(initWeb3Instance);
+  const web3Connected: boolean = yield call(initWeb3Instance);
   console.log('web3 connected ' + web3Connected);
 
-  const osConnected = yield call(initOpenseaInstance);
+  const osConnected: boolean = yield call(initOpenseaInstance);
   console.log('opensea connected ' + osConnected);
 }
 

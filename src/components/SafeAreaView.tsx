@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, SafeAreaView, StatusBar } from 'react-native';
 
-const MySafeAreaView = ({ children, style }) => {
+const MySafeAreaView = ({ children, style }: any) => {
   return (
     <SafeAreaView
       style={[

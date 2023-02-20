@@ -1,5 +1,5 @@
 import { call, put, takeEvery, all, select } from 'redux-saga/effects';
-import { navigate } from 'utils/NavigationService';
+import { navigate } from '../../../utils/NavigationService';
 import { walletActions } from '@crypto-redux/reducers/wallet';
 import { authActions } from '@crypto-redux/reducers/auth';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
@@ -9,6 +9,11 @@ import { web3Client } from 'src/utils/Web3ClientFunc';
 import Selectors from '@crypto-redux/selectors';
 
 const CryptoJS = require("crypto-js");
+
+export interface AccountRetType {
+  accountAddress: string,
+  encryptedPrivateKey: string
+}
 
 const setSecretPassword = async () => {
   try {
@@ -20,7 +25,7 @@ const setSecretPassword = async () => {
   }
 }
 
-const getSecretPassword = async () => {
+const getSecretPassword = async (): Promise<string | null> => {
   try {
     const credentials = await getGenericPassword();
     if (!credentials) {
@@ -41,8 +46,8 @@ const generateSeedPhrase = async() => {
 }
 
 const addAccount = async(  
-    seedPhrase,
-    addressIndex = 0) => {
+    seedPhrase: string,
+    addressIndex = 0): Promise<AccountRetType> => {
   // generate hdwallet from seed phrase
   const hdwallet = hdkey.fromMasterSeed(bip39.mnemonicToSeed(seedPhrase));
 
@@ -67,7 +72,7 @@ const addAccount = async(
   return {accountAddress, encryptedPrivateKey};
 }
 
-function* createWallet(data) {
+function* createWallet(data: any): any {
 
   // Create secret for encrypting privateKey
   setSecretPassword();
@@ -87,14 +92,14 @@ function* createWallet(data) {
   }
 }
 
-function* importFromSeedPhrase(action) {
+function* importFromSeedPhrase(action: any) {
     // Create secret for encrypting privateKey
     setSecretPassword();
 
     try {
       const seedPhrase = action.payload.token;
       const seedPhraseList = seedPhrase.split(' ');
-      const accountCreated = yield addAccount(seedPhrase);
+      const accountCreated: AccountRetType = yield addAccount(seedPhrase);
 
       console.log('importFromSeedPhrase:', { seedPhrase, seedPhraseList, accountCreated });
 
@@ -109,7 +114,7 @@ function* importFromSeedPhrase(action) {
 }
 
 const addAccountFromPrivateKey = async(  
-    privateKey) => {
+    privateKey: string): Promise<AccountRetType> => {
 
   // private key always start with 0x
   privateKey = '0x'+privateKey;
@@ -131,13 +136,13 @@ const addAccountFromPrivateKey = async(
   return {accountAddress, encryptedPrivateKey};
 }
 
-function* importFromPrivateKey(action) {
+function* importFromPrivateKey(action: any) {
   // Create secret for encrypting privateKey
   setSecretPassword();
   try {
     const privateKey = action.payload.token;
 
-    const accountCreated = yield addAccountFromPrivateKey(privateKey);
+    const accountCreated: AccountRetType = yield addAccountFromPrivateKey(privateKey);
 
     console.log('importFromPrivateKey:', { privateKey, accountCreated });
 
@@ -150,17 +155,17 @@ function* importFromPrivateKey(action) {
   }
 }
 
-function* sendAmount(action) {
+function* sendAmount(action: any) {
   try {
     const {
       from,
       to,
       amount,
     } = action.payload;
-    const currentAccount = yield select(Selectors.currentAccount);
-    const secretPassword = yield call(getSecretPassword);
+    const currentAccount: AccountRetType = yield select(Selectors.currentAccount);
+    const secretPassword: string | null = yield call(getSecretPassword);
     // decrypt the enc private key
-    const bytes = yield CryptoJS.AES.decrypt(
+    const bytes: string = yield CryptoJS.AES.decrypt(
       currentAccount.encryptedPrivateKey,
       secretPassword);
     const privateKey = bytes.toString(CryptoJS.enc.Utf8);
