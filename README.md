@@ -1,5 +1,5 @@
 ## Crypto Wallet App
-This is  Crypto Wallet App for Ethereum/Polygon blockchain.  
+This is Crypto Wallet App for Ethereum/Polygon blockchain, written in typscript.  
 It is tested on Rinkeby testnet  
 Created with react-native init  
 
