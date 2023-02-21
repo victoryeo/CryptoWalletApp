@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -42,6 +42,9 @@ const ImportSeed = ({ navigation }: any) => {
       onSubmit: handleFormSubmission,
     });
 
+  const ref_password = useRef<TextInput|null>()
+  const ref_confirmPassword = useRef<TextInput|null>()
+
   return (
     <SafeAreaView style={[styles.safeAreaContainer]}>
       <KeyboardAwareScrollView
@@ -57,7 +60,8 @@ const ImportSeed = ({ navigation }: any) => {
               autoCapitalize='none'
               value={values.seed}
               onChangeText={handleChange('seed')}
-              onSubmitEditing={() => form.refs.password.current?.focus()}
+              onSubmitEditing={() => ref_password.current?.focus()}
+              blurOnSubmit={false}
               showScan
               returnKeyType="next"
               returnKeyLabel='next'
@@ -65,24 +69,27 @@ const ImportSeed = ({ navigation }: any) => {
             />
             <Text style={[styles.words]}>Enter Password</Text>
             <TextInput
+              forwardRef={ref_password}
               secureTextEntry={true}
               autoCapitalize='none'
               value={values.password}
               onChangeText={handleChange('password')}
               onSubmitEditing={() => {
-                form.refs.confirmPassword.current?.focus();
+                ref_confirmPassword.current?.focus();
               }}
+              blurOnSubmit={false}
               returnKeyType="next"
               returnKeyLabel='next'
               style={[styles.input]}
             />
             <Text style={[styles.words]}>{'\n'}Confirm Password</Text>
             <TextInput
+              forwardRef={ref_confirmPassword}
               secureTextEntry={true}
               autoCapitalize='none'
               value={values.confirmPassword}
               onChangeText={handleChange('confirmPassword')}
-              onSubmitEditing={() => form.refs.confirmPassword.current?.blur()}
+              blurOnSubmit={true}
               returnKeyType="done"
               returnKeyLabel='done'
               style={[styles.input]}
