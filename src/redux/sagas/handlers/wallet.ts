@@ -56,6 +56,7 @@ const addAccount = async(
   const path = `m/44'/60'/0'/0/${addressIndex}`;
   const wallet = hdwallet.derivePath(path).getWallet();
   const privateKey = wallet.getPrivateKeyString();
+  console.log('pk ', privateKey)
 
   // Add privateKey to Web3 Wallet
   web3Client.addAccountToWallet( privateKey );

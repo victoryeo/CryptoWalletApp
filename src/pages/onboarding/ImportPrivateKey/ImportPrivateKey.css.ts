@@ -32,6 +32,12 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginTop: wpx(8),
   },
+  warningWords: {
+    color: g.colors.red,
+    textAlign: 'center',
+    marginTop: wpx(8),
+    fontWeight: 'bold',
+  },
   input: {
     backgroundColor: g.colors.darkGray,
     marginTop: wpx(4),

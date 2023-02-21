@@ -46,7 +46,8 @@ const ImportPrivateKey = ({ navigation }) => {
 
         <View style={[styles.container]}>
           <View>
-            <Text style={[styles.words]}>Enter Private Key</Text>
+            <Text style={[styles.words]}>Enter Private Key <Text style={[styles.warningWords]}>without 0x prefix</Text></Text>
+            
             <TextInput
               secureTextEntry={true}
               autoCapitalize='none'
