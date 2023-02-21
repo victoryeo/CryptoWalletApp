@@ -151,8 +151,16 @@ function* importFromPrivateKey(action: any) {
     yield put(walletActions.SET_CURRENT_ACCOUNT(accountCreated));
     yield put(authActions.SIGN_IN());
 
-  } catch (err) {
-    console.log('importFromPrivateKey error:', err);
+  } catch (err: unknown) {
+    // error processing
+    if (typeof err === "string") {
+      console.log('string ', err);
+      yield put(walletActions.SET_ERROR(err))
+    }
+    else if (err instanceof Error) {
+      console.log('instanceof', err.message)
+      yield put(walletActions.SET_ERROR(err.message))
+    }
   }
 }
 
