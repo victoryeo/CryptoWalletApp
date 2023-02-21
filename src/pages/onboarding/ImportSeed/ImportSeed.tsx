@@ -12,17 +12,23 @@ import TextInput from 'src/components/TextInput';
 
 import styles from './ImportSeed.css';
 
-const ImportSeed = ({ navigation }) => {
+interface ImportSeedType {
+  seed: string,
+  password: string,
+  confirmPassword: string,
+}
+
+const ImportSeed = ({ navigation }: any) => {
   const dispatch = useDispatch();
   const form = {
     initialValue: {
       seed: '',
       password: '',
       confirmPassword: '',
-    },
+    }
   };
 
-  const handleFormSubmission = value => {
+  const handleFormSubmission = (value : ImportSeedType) => {
     console.log(value.seed);
     let seedPhrase = value.seed;
 
@@ -33,7 +39,6 @@ const ImportSeed = ({ navigation }) => {
   const { handleSubmit, handleChange, values } =
     useFormik({
       initialValues: form.initialValue,
-      validate: form.validate,
       onSubmit: handleFormSubmission,
     });
 
