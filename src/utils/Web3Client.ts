@@ -1,7 +1,7 @@
 import Web3 from 'web3';
 import {API_KEY} from "@env";
 
-console.log(API_KEY)
+console.log("apikey", API_KEY)
 const goerli = `https://eth-goerli.g.alchemy.com/v2/${API_KEY}`
 
 class Web3Client {
