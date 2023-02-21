@@ -23,7 +23,7 @@ class Web3Client {
   }
 
   // add the generated private key to web3
-  addAccountToWallet({ privateKey }) {
+  addAccountToWallet( privateKey : string) {
     console.log('addAccountToWallet '+ privateKey)
     const account = this.web3Instance.eth.accounts.privateKeyToAccount(privateKey);
     this.web3Instance.eth.accounts.wallet.add(account);
