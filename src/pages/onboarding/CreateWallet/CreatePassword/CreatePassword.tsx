@@ -2,18 +2,17 @@ import React, { useRef, useContext, useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRoute } from '@react-navigation/native';
 
-import TextInput from 'src/components/TextInput';
-import Button from 'src/components/Button';
+import TextInput from '../../../../components/TextInput';
+import Button from '../../../../components/Button';
 
 import { SafeAreaView } from '../../../../components';
 import navigationPropTypes from '../../../../utils/commonPropTypes';
 import CreateWalletContext from '../CreateWalletContext';
 import styles from './CreatePassword.css';
 
-const getPasswordStrength = password => {
+const getPasswordStrength = (password: string) => {
   const lowerCaseExists = password.match('(?=.*[a-z])');
   const upperCaseExists = password.match('(?=.*[A-Z])');
   const digitExists = password.match(`(?=.*\\d)`);
@@ -22,6 +21,10 @@ const getPasswordStrength = password => {
   const passwordStrengthCount = [lowerCaseExists, upperCaseExists, digitExists, specialCharExists].filter(
     val => val !== null,
   ).length;
+
+  interface passwordStrengthType {
+
+  }
 
   const passwordStrength = {
     2: {
@@ -39,9 +42,7 @@ const getPasswordStrength = password => {
   };
   const config =
     passwordStrength[
-      Object.keys(passwordStrength).find(key => {
-        return Number.parseFloat(key) >= passwordStrengthCount;
-      })
+      '2'
     ];
 
   return (
@@ -51,9 +52,14 @@ const getPasswordStrength = password => {
   );
 };
 
-const CreatePassword = ({ navigation }) => {
-  const route = useRoute();
+interface CreatePasswordType {
+  password: string,
+  confirmPassword: string,
+}
 
+const CreatePassword = ({ navigation }: any) => {
+  const route: any = useRoute();
+  const isChangePassword: boolean = route.params?.isChangePassword || false
   useEffect(() => {
 
   }, []);
@@ -67,14 +73,12 @@ const CreatePassword = ({ navigation }) => {
       password: Yup.string().required('Required').min(4, 'Must be at least 4 characters'),
       confirmPassword: Yup.string().required('Required'),
     }),
-    validate: async values => {
-      const errors = {};
+    validate: async (values: CreatePasswordType) => {
+      let  errors: CreatePasswordType = {} as CreatePasswordType
 
       if (values.password !== values.confirmPassword) {
         errors.confirmPassword = 'Password mismatch';
-        return errors;
       }
-
       return errors;
     },
     refs: {
@@ -96,14 +100,15 @@ const CreatePassword = ({ navigation }) => {
     validateOnBlur: false,
   });
 
-  const getValidationError = key => touched[key] && errors[key];
+  const getValidationError = (key: string): string => 
+    touched[key] && errors[key];
 
   return (
       <SafeAreaView style={[styles.safeAreaContainer]}>
         <View style={[styles.container]}>
           <View style={[styles.containerLogoAndTitle]}>
             <Text style={[styles.bigwords]}>
-              {route.params?.isChangePassword ? 'Change Password' : 'Create Password'}
+              {isChangePassword ? 'Change Password' : 'Create Password'}
             </Text>
             <Text style={[styles.words]}>
               This password will unlock your wallet only on this service
@@ -119,6 +124,7 @@ const CreatePassword = ({ navigation }) => {
               onSubmitEditing={() => {
                 CreatePasswordForm.refs.confirmPassword.current?.focus();
               }}
+              blurOnSubmit={false}
               error={getValidationError('password')}
               returnKeyType="next"
               returnKeyLabel='next'
@@ -131,6 +137,7 @@ const CreatePassword = ({ navigation }) => {
               autoCapitalize='none'
               value={values.confirmPassword}
               onChangeText={handleChange('confirmPassword')}
+              blurOnSubmit={true}
               error={getValidationError('confirmPassword')}
               returnKeyType="done"
               returnKeyLabel='done'
