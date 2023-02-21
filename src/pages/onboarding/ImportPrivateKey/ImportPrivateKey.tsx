@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import React, { useRef, useEffect } from 'react';
+import { Text, View, Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -9,6 +9,7 @@ import navigationPropTypes from 'utils/commonPropTypes';
 import { SafeAreaView } from 'components';
 import Button from 'src/components/Button';
 import TextInput from 'src/components/TextInput';
+import Selectors from '@crypto-redux/selectors';
 
 import styles from './ImportPrivateKey.css';
 
@@ -19,6 +20,8 @@ interface ImportPrivateKeyType {
 }
 
 const ImportPrivateKey = ({ navigation }: any) => {
+  let walletErrorMsg: string = useSelector(Selectors.walletErrorMsg);
+  //console.log(walletErrorMsg)
   const dispatch = useDispatch();
   const form = {
     initialValue: {
@@ -35,7 +38,7 @@ const ImportPrivateKey = ({ navigation }: any) => {
       // Call API with the seed phrase
       dispatch(walletActions.IMPORT_PRIVATE_KEY({ token: privateKey }));
     } catch (e) {
-      console.log('dispatch wallet error')
+      console.log('dispatch IMPORT_PRIVATE_KEY', e)
     }
   };
 
@@ -47,6 +50,22 @@ const ImportPrivateKey = ({ navigation }: any) => {
 
   const ref_password = useRef<TextInput|null>()
   const ref_confirmPassword = useRef<TextInput|null>()
+
+  useEffect(() => {
+    // below line called on first mount
+    dispatch(walletActions.FETCH_STATE())
+    // return fucntion called on un-mount
+    return () => {
+      dispatch(walletActions.FETCH_STATE())
+    }
+  },[])
+
+  useEffect(()=>{
+    if (walletErrorMsg !== '') {
+      console.log('useEffect', walletErrorMsg)
+      Alert.alert('Alert', walletErrorMsg)
+    }
+  })
 
   return (
     <SafeAreaView style={[styles.safeAreaContainer]}>
