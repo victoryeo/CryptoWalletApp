@@ -26,20 +26,28 @@ const NFT = ({ navigation }: any) => {
           owner: currentAccount.accountAddress
         },
       }
-      let resp = await axios.get(url, config);
-      console.log(resp.data?.assets[0]?.id)
-      console.log(resp.data?.assets[0]?.image_url)
-      setId(resp.data?.assets[0]?.id);
-      setImageURI(resp.data?.assets[0]?.image_url);
-      setDesc(resp.data?.assets[0]?.description);
+      try {
+        let resp = await axios.get(url, config);
+        console.log('id', resp.data?.assets[0]?.id)
+        console.log('image_url', resp.data?.assets[0]?.image_url)
+        setId(resp.data?.assets[0]?.id);
+        setImageURI(resp.data?.assets[0]?.image_url);
+        setDesc(resp.data?.assets[0]?.description);
+      } catch (e) {
+        console.log("fetchNFT", e)
+      }
     }
-    fetchNFT().catch(console.error)
+    fetchNFT()
 
     const fetchContractAsset = async() => {
-      let data = await getNFTAsset(TOKEN_ADDRESS);
-      console.log(data)
+      try {
+        let data = await getNFTAsset(TOKEN_ADDRESS);
+        console.log('data',data)
+      } catch (e) {
+        console.log("fetchContractAsset", e)
+      }
     }
-    fetchContractAsset().catch(console.error)
+    fetchContractAsset()
   }, []);
 
   return (
