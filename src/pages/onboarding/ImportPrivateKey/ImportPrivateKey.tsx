@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -12,7 +12,13 @@ import TextInput from 'src/components/TextInput';
 
 import styles from './ImportPrivateKey.css';
 
-const ImportPrivateKey = ({ navigation }) => {
+interface ImportPrivateKeyType {
+  privateKey: string,
+  password: string,
+  confirmPassword: string,
+}
+
+const ImportPrivateKey = ({ navigation }: any) => {
   const dispatch = useDispatch();
   const form = {
     initialValue: {
@@ -22,19 +28,25 @@ const ImportPrivateKey = ({ navigation }) => {
     },
   };
 
-  const handleFormSubmission = value => {
+  const handleFormSubmission = (value: ImportPrivateKeyType) => {
     let privateKey = value.privateKey;
 
-    // Call API with the seed phrase
-    dispatch(walletActions.IMPORT_PRIVATE_KEY({ token: privateKey }));
+    try {
+      // Call API with the seed phrase
+      dispatch(walletActions.IMPORT_PRIVATE_KEY({ token: privateKey }));
+    } catch (e) {
+      console.log('dispatch wallet error')
+    }
   };
 
   const { handleSubmit, handleChange, values } =
     useFormik({
       initialValues: form.initialValue,
-      validate: form.validate,
       onSubmit: handleFormSubmission,
     });
+
+  const ref_password = useRef<TextInput|null>()
+  const ref_confirmPassword = useRef<TextInput|null>()
 
   return (
     <SafeAreaView style={[styles.safeAreaContainer]}>
@@ -53,7 +65,10 @@ const ImportPrivateKey = ({ navigation }) => {
               autoCapitalize='none'
               value={values.privateKey}
               onChangeText={handleChange('privateKey')}
-              onSubmitEditing={() => form.refs.password.current?.focus()}
+              onSubmitEditing={() => {
+                ref_password.current?.focus()
+              }}
+              blurOnSubmit={false}
               showScan
               returnKeyType="next"
               returnKeyLabel='next'
@@ -61,24 +76,27 @@ const ImportPrivateKey = ({ navigation }) => {
             />
             <Text style={[styles.words]}>Enter Password</Text>
             <TextInput
+              forwardRef={ref_password}
               secureTextEntry={true}
               autoCapitalize='none'
               value={values.password}
               onChangeText={handleChange('password')}
               onSubmitEditing={() => {
-                form.refs.confirmPassword.current?.focus();
+                ref_confirmPassword.current?.focus();
               }}
+              blurOnSubmit={false}
               returnKeyType="next"
               returnKeyLabel='next'
               style={[styles.input]}
             />
             <Text style={[styles.words]}>{'\n'}Confirm Password</Text>
             <TextInput
+              forwardRef={ref_confirmPassword}
               secureTextEntry={true}
               autoCapitalize='none'
               value={values.confirmPassword}
               onChangeText={handleChange('confirmPassword')}
-              onSubmitEditing={() => form.refs.confirmPassword.current?.blur()}
+              blurOnSubmit={true}
               returnKeyType="done"
               returnKeyLabel='done'
               style={[styles.input]}
