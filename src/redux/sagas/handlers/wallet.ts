@@ -1,12 +1,12 @@
 import { call, put, takeEvery, all, select } from 'redux-saga/effects';
-import { navigate } from '../../../utils/NavigationService';
-import { walletActions } from '@crypto-redux/reducers/wallet';
-import { authActions } from '@crypto-redux/reducers/auth';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import bip39 from 'react-native-bip39';
 import { hdkey } from 'ethereumjs-wallet';
-import { web3Client } from 'src/utils/Web3ClientFunc';
-import Selectors from '@crypto-redux/selectors';
+import { walletActions } from '../../reducers/wallet';
+import { authActions } from '../../reducers/auth';
+import Selectors from '../../selectors';
+import { web3Client } from '../../../utils/Web3ClientFunc';
+import { navigate } from '../../../utils/NavigationService';
 
 const CryptoJS = require("crypto-js");
 

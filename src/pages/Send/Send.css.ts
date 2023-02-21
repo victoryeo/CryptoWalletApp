@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { wpx } from 'utils/dimensions';
+import { wpx } from '../../utils/dimensions';
 
 export default StyleSheet.create({
   container: {

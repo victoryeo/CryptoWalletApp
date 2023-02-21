@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
-import SafeAreaView from 'src/components/SafeAreaView';
-import Selectors from '@crypto-redux/selectors';
+import SafeAreaView from '../../components/SafeAreaView';
+import Button from '../../components/Button';
+import Selectors from '../../redux/selectors';
 
-import Button from 'src/components/Button';
 import { getAccountBalance, getGasPrice } from '../../utils/Web3ClientFunc';
 import styles from './Wallet.css';
 
-const Wallet = ({ navigation }) => {
+const Wallet = ({ navigation }: any) => {
   const currentAccount = useSelector(Selectors.currentAccount);
   const [bala, setBala] = useState(0);
   const [gasPrice, setGasPrice] = useState(0);
@@ -17,8 +17,8 @@ const Wallet = ({ navigation }) => {
       console.log("Wallet fetchBalance")
       let data = await getAccountBalance(currentAccount.accountAddress);
       // 1ETH = 10^18 wei
-      data = data / 1e18;
-      setBala(data)
+      let dataNum = parseInt(data, 10) / 1e18;
+      setBala(dataNum)
     }
     fetchBalance().catch(console.error)
 
@@ -27,8 +27,8 @@ const Wallet = ({ navigation }) => {
       try {
       let data = await getGasPrice();
       // 1GWEI = 10^9 wei
-      data = data / 1e9;
-      setGasPrice(data)
+      let dataNum = parseInt(data, 10) / 1e9;
+      setGasPrice(dataNum)
       } catch (e) {
         console.log("fetchGasPrice ", e);
       }

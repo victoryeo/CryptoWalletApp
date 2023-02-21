@@ -1,24 +1,24 @@
 import React, { useRef, useState } from 'react';
 import { Text, View, Image, ImageBackground, Dimensions } from 'react-native';
-import Button from 'src/components/Button';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { SafeAreaView } from 'src/components';
-import navigationPropTypes from 'src/utils/commonPropTypes'
+import Button from '../../components/Button';
+import { SafeAreaView } from '../../components';
+import navigationPropTypes from '../../utils/commonPropTypes'
 import bgMain from 'src/assets/img/background/splash.jpg';
 import styles from './Onboarding.css';
 import data from './OnboardingRotation';
 
-const Onboarding = ({ navigation }) => {
+const Onboarding = ({ navigation }: any) => {
   const SLIDER_WIDTH = Dimensions.get('window').width + 80
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
   const carousel = useRef(null);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
-  const handleSnapToItem = index => {
+  const handleSnapToItem = (index: any) => {
     setActiveSlideIndex(index);
   };
 
-  const carouselCardItem = ({ item, index }) => {
+  const carouselCardItem = ({ item, index }: any) => {
     return (
       <View style={[styles.slide]} key={index}>
         <Image

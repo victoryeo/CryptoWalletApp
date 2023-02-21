@@ -3,14 +3,14 @@ import { FlatList, Text, View, Image, Share } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-import SafeAreaView from 'src/components/SafeAreaView';
-import styles from './Settings.css';
-import { wpx } from 'src/utils/dimensions';
+import SafeAreaView from '../../components/SafeAreaView';
+import { wpx } from '../../utils/dimensions';
 import iconLogout from 'src/assets/img/icon/settings/logout.png';
 import iconShareAddress from 'src/assets/img/icon/settings/share_address.png';
-import { authActions } from '@crypto-redux/reducers/auth';
+import { authActions } from '../../redux/reducers/auth';
+import styles from './Settings.css';
 
-const Settings = ({ navigation }) => {
+const Settings = ({ navigation }: any) => {
   const dispatch = useDispatch();
 
   const settingsList = [{

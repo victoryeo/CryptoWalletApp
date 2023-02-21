@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { walletActions } from '@crypto-redux/reducers/wallet';
-import navigationPropTypes from 'utils/commonPropTypes';
-import { SafeAreaView } from 'components';
-import Button from 'src/components/Button';
-import TextInput from 'src/components/TextInput';
-import Selectors from '@crypto-redux/selectors';
+import { walletActions } from '../../../redux/reducers/wallet';
+import navigationPropTypes from '../../../utils/commonPropTypes';
+import { SafeAreaView } from '../../../components';
+import Button from '../../../components/Button';
+import TextInput from '../../../components/TextInput';
+import Selectors from '../../../redux/selectors';
 
 import styles from './ImportPrivateKey.css';
 

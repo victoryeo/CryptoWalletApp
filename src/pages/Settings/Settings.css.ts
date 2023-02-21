@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
-import { wpx } from 'utils/dimensions';
-import g from 'src/assets/globalStyle';
+import { wpx } from '../../utils/dimensions';
+import g from '../../assets/globalStyle';
 
 const MARGIN_HOR = wpx (16);
 

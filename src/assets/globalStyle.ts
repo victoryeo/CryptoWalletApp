@@ -1,4 +1,4 @@
-import { wpx } from 'src/utils/dimensions';
+import { wpx } from '../utils/dimensions';
 
 const general = {
   colors: {

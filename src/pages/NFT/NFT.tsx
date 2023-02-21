@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
-import SafeAreaView from 'src/components/SafeAreaView';
-import Selectors from '@crypto-redux/selectors';
-import axios from 'axios';
 import { Tile } from 'react-native-elements';
-import { getNFTAsset } from 'src/utils/OpenseaClientFunc';
+import axios from 'axios';
+import SafeAreaView from '../../components/SafeAreaView';
+import Selectors from '../../redux/selectors';
+import { getNFTAsset } from '../../utils/OpenseaClientFunc';
 import styles from './NFT.css';
-import { TOKEN_ADDRESS } from "@env";
 import { AccountRetType } from '../../redux/sagas/handlers/wallet';
+import { TOKEN_ADDRESS } from "@env";
 
 const NFT = ({ navigation }: any) => {
   const currentAccount: AccountRetType = useSelector(Selectors.currentAccount);

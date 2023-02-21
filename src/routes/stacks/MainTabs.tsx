@@ -2,11 +2,11 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Wallet from 'src/pages/Wallet';
-import NFT from 'src/pages/NFT';
-import Settings from 'src/pages/Settings';
-import { wpx } from 'utils/dimensions';
-import g from 'src/assets/globalStyle';
+import Wallet from '../../pages/Wallet';
+import NFT from '../../pages/NFT';
+import Settings from '../../pages/Settings';
+import { wpx } from '../../utils/dimensions';
+import g from '../../assets/globalStyle';
 
 const Tab = createBottomTabNavigator();
 

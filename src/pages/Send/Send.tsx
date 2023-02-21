@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { Text, View } from 'react-native';
-import SafeAreaView from 'src/components/SafeAreaView';
-import Header from 'src/components/Header';
-import TextInput from 'src/components/TextInput';
-import Button from 'src/components/Button';
+import SafeAreaView from '../../components/SafeAreaView';
+import Header from '../../components/Header';
+import TextInput from '../../components/TextInput';
+import Button from '../../components/Button';
 import styles from './Send.css';
-import globalS from 'src/assets/globalStyle';
-import { pop } from 'utils/NavigationService';
-import Selectors from '@crypto-redux/selectors';
-import { walletActions } from '@crypto-redux/reducers/wallet';
+import globalS from '../../assets/globalStyle';
+import { pop } from '../../utils/NavigationService';
+import Selectors from '../../redux/selectors';
+import { walletActions } from '../../redux/reducers/wallet';
 
-const Send = ({ navigation }) => {
+const Send = ({ navigation }: any) => {
   const dispatch = useDispatch();
 
   const [toAddress, setToAddress] = useState(null);

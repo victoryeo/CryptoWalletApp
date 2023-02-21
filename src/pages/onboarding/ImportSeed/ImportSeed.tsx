@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { walletActions } from '@crypto-redux/reducers/wallet';
-import navigationPropTypes from 'utils/commonPropTypes';
-import { SafeAreaView } from 'components';
-import Button from 'src/components/Button';
-import TextInput from 'src/components/TextInput';
+import { walletActions } from '../../../redux/reducers/wallet';
+import navigationPropTypes from '../../../utils/commonPropTypes';
+import { SafeAreaView } from '../../../components';
+import Button from '../../../components/Button';
+import TextInput from '../../../components/TextInput';
 
 import styles from './ImportSeed.css';
 
