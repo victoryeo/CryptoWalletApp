@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Tile } from 'react-native-elements';
 import { getNFTAsset } from 'src/utils/OpenseaClientFunc';
 import styles from './NFT.css';
-import {TOKEN_ADDRESS} from "@env";
+import { TOKEN_ADDRESS } from "@env";
 import { AccountRetType } from '../../redux/sagas/handlers/wallet';
 
 const NFT = ({ navigation }: any) => {
