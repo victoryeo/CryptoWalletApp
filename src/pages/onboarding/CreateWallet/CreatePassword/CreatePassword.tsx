@@ -100,7 +100,7 @@ const CreatePassword = ({ navigation }: any) => {
     validateOnBlur: false,
   });
 
-  const getValidationError = (key: string): string => 
+  const getValidationError = (key: keyof typeof errors): string => 
     touched[key] && errors[key];
 
   return (
