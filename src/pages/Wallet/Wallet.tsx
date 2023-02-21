@@ -14,6 +14,7 @@ const Wallet = ({ navigation }) => {
   const [gasPrice, setGasPrice] = useState(0);
   useEffect(() => {
     const fetchBalance = async() => {
+      console.log("Wallet fetchBalance")
       let data = await getAccountBalance(currentAccount.accountAddress);
       // 1ETH = 10^18 wei
       data = data / 1e18;
@@ -22,10 +23,15 @@ const Wallet = ({ navigation }) => {
     fetchBalance().catch(console.error)
 
     const fetchGasPrice = async() => {
+      console.log("Wallet getGasPrice")
+      try {
       let data = await getGasPrice();
       // 1GWEI = 10^9 wei
       data = data / 1e9;
       setGasPrice(data)
+      } catch (e) {
+        console.log("fetchGasPrice ", e);
+      }
     }
     fetchGasPrice().catch(console.error)
   }, []);

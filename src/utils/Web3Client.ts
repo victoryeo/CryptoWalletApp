@@ -2,17 +2,18 @@ import Web3 from 'web3';
 import {API_KEY} from "@env";
 
 console.log(API_KEY)
-const rinkeby = `https://eth-rinkeby.alchemyapi.io/v2/${API_KEY}`
+const goerli = `https://eth-goerli.g.alchemy.com/v2/${API_KEY}`
 
 class Web3Client {
+  web3Instance: Web3
   constructor() {
-    this.web3Instance = null;
+    this.web3Instance = <Web3>{};
     this.init();
   }
 
   init() {
     try {
-      const web3 = new Web3(new Web3.providers.HttpProvider(rinkeby));
+      const web3 = new Web3(new Web3.providers.HttpProvider(goerli));
       this.web3Instance = web3;
       //console.log(this.web3Instance);
     } catch (err) {
@@ -29,7 +30,7 @@ class Web3Client {
     return account;
   }
 
-  async getAccountBalance(address) {
+  async getAccountBalance(address: string) {
     return await this.web3Instance.eth.getBalance(address);
   }  
   
@@ -37,7 +38,7 @@ class Web3Client {
     return await this.web3Instance.eth.getGasPrice();
   }
 
-  async sendAmount(from, to, amount, pk)
+  async sendAmount(from: any, to: any, amount: any, pk: string)
   {
     console.log('sendAmount ', from, to, amount, pk)
     const nonce = await this.web3Instance.eth.getTransactionCount(from, 'latest'); 
@@ -54,7 +55,7 @@ class Web3Client {
     console.log(signedTx)
 
     try {
-      const hash = await this.web3Instance.eth.sendSignedTransaction(signedTx.rawTransaction) 
+      const hash = await this.web3Instance.eth.sendSignedTransaction(signedTx.rawTransaction || '')
       console.log("The hash of your transaction is: ", hash, "\n Check Alchemy's Mempool to view the status of your transaction!")
     } catch (error) {
       console.log("Something went wrong while submitting your transaction:", error)
