@@ -1,6 +1,5 @@
 import React from 'react';
-import { ImageBackground } from 'react-native';
-import { ActivityIndicator } from 'react-native';
+import { ImageBackground, ActivityIndicator } from 'react-native';
 
 import SplashImage from 'src/assets/img/background/splash.jpg';
 
