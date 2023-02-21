@@ -6,12 +6,18 @@ const initialState = {
   accounts: [],
   currentAccount: null,
   sendSuccess: false,
+  errorMsg: '',
 }
 
 const wallet = createSlice({
   name: 'wallet',
   initialState,
   reducers: {
+    FETCH_STATE: () =>{
+      return {
+          ...initialState, 
+      }
+    },
     CREATE_WALLET: data => {
       console.log('CREATE_WALLET reducer ', {data})
     },
@@ -38,7 +44,10 @@ const wallet = createSlice({
     },
     SEND: (state, action) => {
       state.sendSuccess = true;
-    },  
+    },
+    SET_ERROR: (state, action) => {
+      state.errorMsg = action.payload 
+    }
   }
 })
 
