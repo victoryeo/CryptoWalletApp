@@ -42,8 +42,8 @@ const ImportSeed = ({ navigation }: any) => {
       onSubmit: handleFormSubmission,
     });
 
-  const ref_password = useRef<TextInput|null>()
-  const ref_confirmPassword = useRef<TextInput|null>()
+  const ref_password = useRef<typeof TextInput|null>()
+  const ref_confirmPassword = useRef<typeof TextInput|null>()
 
   return (
     <SafeAreaView style={[styles.safeAreaContainer]}>
