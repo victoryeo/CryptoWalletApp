@@ -11,6 +11,7 @@ import { SafeAreaView } from '../../../../components';
 import navigationPropTypes from '../../../../utils/commonPropTypes';
 import CreateWalletContext from '../CreateWalletContext';
 import styles from './CreatePassword.css';
+import { PwdContextType } from '../CreateWallet';
 
 const getPasswordStrength = (password: string) => {
   const lowerCaseExists = password.match('(?=.*[a-z])');
@@ -86,7 +87,7 @@ const CreatePassword = ({ navigation }: any) => {
     },
   };
 
-  const context = useContext(CreateWalletContext);
+  const context: PwdContextType = useContext(CreateWalletContext);
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: CreatePasswordForm.initialValue,

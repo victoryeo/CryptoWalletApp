@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import navigationPropTypes from '../../../utils/commonPropTypes';
 
-import CreateWalletContext from './CreateWalletContext';
+import CreateWalletContext, { PwdContextType} from './CreateWalletContext';
 import CreatePassword from './CreatePassword';
 import SecureYourWallet from './SecureYourWallet';
 import WriteDownSeedPhrase from './WriteDownSeedPhrase';
@@ -21,7 +21,7 @@ const CreateWallet = ({ navigation }: any) => {
   const dispatch = useDispatch();
 
   const [createSeedPhraseSuccessful, setCreateSeedPhraseSuccessful] = useState(false);
-  const context = {
+  const context: PwdContextType = {
     createSeedPhraseSuccessful,
     handleCreatePasswordSubmitClick: async ({ password }: any) => {
       dispatch(walletActions.CREATE_WALLET({ password }));
