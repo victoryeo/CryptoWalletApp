@@ -1,10 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  password: null,
-  seedPhrases: null,
+interface AccountsType {
+  accountAddress: string,
+  encryptedPrivateKey: string,
+}
+
+interface WalletState {
+  password: string,
+  seedPhrases: string,
+  accounts: AccountsType[],
+  currentAccount: AccountsType,
+  sendSuccess: boolean,
+  errorMsg: string,
+}
+
+const initialState: WalletState = {
+  password: '',
+  seedPhrases: '',
   accounts: [],
-  currentAccount: null,
+  currentAccount: {} as AccountsType,
   sendSuccess: false,
   errorMsg: '',
 }
@@ -34,6 +48,7 @@ const wallet = createSlice({
     },
     ADD_ACCOUNT: (state, action) => {
       state.accounts = [...state.accounts, action.payload];
+      console.log('ADD_ACCOUNT', state.accounts)
     },
     IMPORT_WALLET: (state, action) => {
       console.log('IMPORT_WALLET reducer ', {action})
