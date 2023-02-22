@@ -9,9 +9,8 @@ import Button from '../../../../components/Button';
 
 import { SafeAreaView } from '../../../../components';
 import navigationPropTypes from '../../../../utils/commonPropTypes';
-import CreateWalletContext from '../CreateWalletContext';
+import CreateWalletContext, { PwdContextType} from '../CreateWalletContext';
 import styles from './CreatePassword.css';
-import { PwdContextType } from '../CreateWallet';
 
 const getPasswordStrength = (password: string) => {
   const lowerCaseExists = password.match('(?=.*[a-z])');
