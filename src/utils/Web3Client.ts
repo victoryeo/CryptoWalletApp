@@ -1,8 +1,7 @@
 import Web3 from 'web3';
-import {API_KEY} from "@env";
 
-console.log("apikey", API_KEY)
-const goerli = `https://eth-goerli.g.alchemy.com/v2/${API_KEY}`
+console.log("apikey", process.env.REACT_APP_API_KEY)
+const goerli = `https://eth-goerli.g.alchemy.com/v2/${process.env.REACT_APP_API_KEY}`
 
 class Web3Client {
   web3Instance: Web3
@@ -15,7 +14,6 @@ class Web3Client {
     try {
       const web3 = new Web3(new Web3.providers.HttpProvider(goerli));
       this.web3Instance = web3;
-      //console.log(this.web3Instance);
     } catch (err) {
       console.warn('Error in web3 initialization.', err);
       throw (err);

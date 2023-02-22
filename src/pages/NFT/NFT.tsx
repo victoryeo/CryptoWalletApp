@@ -8,7 +8,6 @@ import Selectors from '../../redux/selectors';
 import { getNFTAsset } from '../../utils/OpenseaClientFunc';
 import styles from './NFT.css';
 import { AccountRetType } from '../../redux/sagas/handlers/wallet';
-import { TOKEN_ADDRESS } from "@env";
 
 const NFT = ({ navigation }: any) => {
   const currentAccount: AccountRetType = useSelector(Selectors.currentAccount);
@@ -41,7 +40,7 @@ const NFT = ({ navigation }: any) => {
 
     const fetchContractAsset = async() => {
       try {
-        let data = await getNFTAsset(TOKEN_ADDRESS);
+        let data = await getNFTAsset(process.env.REACT_APP_TOKEN_ADDRESS || '');
         console.log('data',data)
       } catch (e) {
         console.log("fetchContractAsset", e)
