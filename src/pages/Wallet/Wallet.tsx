@@ -10,12 +10,14 @@ import styles from './Wallet.css';
 
 const Wallet = ({ navigation }: any) => {
   const currentAccount = useSelector(Selectors.currentAccount);
+  const [accountAddr, setAccountAddr] = useState<string>('')
   const [bala, setBala] = useState(0);
   const [gasPrice, setGasPrice] = useState(0);
   useEffect(() => {
     const fetchBalance = async() => {
-      console.log("Wallet fetchBalance")
-      let data = await getAccountBalance(currentAccount.accountAddress);
+      console.log("Wallet fetchBalance", currentAccount?.accountAddress)
+      setAccountAddr(currentAccount?.accountAddress)
+      let data = await getAccountBalance(currentAccount?.accountAddress);
       // 1ETH = 10^18 wei
       let dataNum = parseInt(data, 10) / 1e18;
       setBala(dataNum)
@@ -43,7 +45,7 @@ const Wallet = ({ navigation }: any) => {
       
         <Text style={[styles.bigwords]}>Gas price: {gasPrice} Gwei</Text>
         <Text style={[styles.bigwords]}>Account Information</Text>
-        <Text style={[styles.words]}>address: {currentAccount.accountAddress}</Text>
+        <Text style={[styles.words]}>address: {accountAddr}</Text>
         <Text style={[styles.words]}>balance: {bala} ETH</Text> 
         <View style={styles.buttonsContainer}>
             <Button label="Send" onPress={() => navigation.navigate('Send')} />

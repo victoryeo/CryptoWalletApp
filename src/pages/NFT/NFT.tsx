@@ -23,7 +23,7 @@ const NFT = ({ navigation }: any) => {
       const config = {
         headers: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36', 'referer':url},
         params: {
-          owner: currentAccount.accountAddress
+          owner: currentAccount?.accountAddress || ''
         },
       }
       try {
@@ -60,7 +60,7 @@ const NFT = ({ navigation }: any) => {
       <View style={[styles.container]}>
       
         <Text style={[styles.bigwords]}>NFT owned by</Text>
-        <Text style={[styles.words]}>{currentAccount.accountAddress}</Text>
+        <Text style={[styles.words]}>{currentAccount?.accountAddress || ''}</Text>
         <View style={styles.space}/>
         <Tile
          imageSrc={{uri:imageURI}}
