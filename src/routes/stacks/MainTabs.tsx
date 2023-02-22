@@ -37,7 +37,7 @@ const MainTabs = () => (
           }
           //console.log(iconName)
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Ionicons name={iconName||''} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#e91e63',
         tabBarInactiveTintColor: 'gray',
