@@ -8,9 +8,8 @@ import CreateWalletContext from './CreateWalletContext';
 import CreatePassword from './CreatePassword';
 import SecureYourWallet from './SecureYourWallet';
 import WriteDownSeedPhrase from './WriteDownSeedPhrase';
-import { walletActions } from '@crypto-redux/reducers/wallet';
-import { modalActions } from '@crypto-redux/reducers/modal';
-import { authActions } from '@crypto-redux/reducers/auth';
+import { walletActions } from '../../../redux/reducers/wallet';
+import { authActions } from '../../../redux/reducers/auth';
 
 const CreateWalletStack = createNativeStackNavigator();
 
@@ -18,13 +17,13 @@ const options = {
   headerShown: false,
 };
 
-const CreateWallet = ({ navigation }) => {
+const CreateWallet = ({ navigation }: any) => {
   const dispatch = useDispatch();
 
   const [createSeedPhraseSuccessful, setCreateSeedPhraseSuccessful] = useState(false);
   const context = {
     createSeedPhraseSuccessful,
-    handleCreatePasswordSubmitClick: async ({ password }) => {
+    handleCreatePasswordSubmitClick: async ({ password }: any) => {
       dispatch(walletActions.CREATE_WALLET({ password }));
     },
     handleSecureYourWalletGotInClick: () => {
