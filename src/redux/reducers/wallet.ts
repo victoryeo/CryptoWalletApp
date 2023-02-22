@@ -18,8 +18,8 @@ const wallet = createSlice({
           ...initialState, 
       }
     },
-    CREATE_WALLET: data => {
-      console.log('CREATE_WALLET reducer ', {data})
+    CREATE_WALLET: (state, action) => {
+      console.log('CREATE_WALLET reducer ', {action})
     },
     SET_PASSWORD: (state, action) => {
       state.password = action.payload;
@@ -36,11 +36,14 @@ const wallet = createSlice({
       state.accounts = [...state.accounts, action.payload];
     },
     IMPORT_WALLET: () => {},
-    IMPORT_PRIVATE_KEY: () => {},
+    IMPORT_PRIVATE_KEY: (state, action) => {
+      console.log('IMPORT_PRIVATE_KEY reducer ', {action})
+    },
     SET_CURRENT_ACCOUNT: (state, action) => {
       state.currentAccount = {
         ...action.payload,
       };
+      console.log('SET_CURRENT_ACCOUNT', state.currentAccount)
     },
     SEND: (state, action) => {
       state.sendSuccess = true;
