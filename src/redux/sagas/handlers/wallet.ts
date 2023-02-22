@@ -122,7 +122,7 @@ const addAccountFromPrivateKey = async(
 
   // Add privateKey to Web3 Wallet
   const account = web3Client.addAccountToWallet( privateKey );
-  console.log(account)
+  console.log('addAccountFromPrivateKey', account)
 
   // Encrypt privateKey
   let encryptedPrivateKey = '';
