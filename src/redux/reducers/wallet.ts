@@ -35,7 +35,9 @@ const wallet = createSlice({
     ADD_ACCOUNT: (state, action) => {
       state.accounts = [...state.accounts, action.payload];
     },
-    IMPORT_WALLET: () => {},
+    IMPORT_WALLET: (state, action) => {
+      console.log('IMPORT_WALLET reducer ', {action})
+    },
     IMPORT_PRIVATE_KEY: (state, action) => {
       console.log('IMPORT_PRIVATE_KEY reducer ', {action})
     },
