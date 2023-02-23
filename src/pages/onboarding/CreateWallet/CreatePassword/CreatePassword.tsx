@@ -82,7 +82,7 @@ const CreatePassword = ({ navigation }: any) => {
       return errors;
     },
     refs: {
-      confirmPassword: useRef(null),
+      confirmPassword: useRef<any>(null),
     },
   };
 
