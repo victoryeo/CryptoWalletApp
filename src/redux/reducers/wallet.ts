@@ -42,8 +42,10 @@ const wallet = createSlice({
       state.seedPhrases = action.payload;
     },
     CLEAN_USER_DATA: state => {
-      Object.keys(initialState).forEach(stateKey => {
-        state[stateKey] = initialState[stateKey];
+      Object.keys(initialState).forEach((stateKey: any) => {
+        console.log(`${stateKey} ${initialState[stateKey as keyof WalletState]}`);
+        (state as Record<typeof stateKey, typeof stateKey>)[stateKey as keyof WalletState] 
+          = initialState[stateKey as keyof WalletState];
       });
     },
     ADD_ACCOUNT: (state, action) => {
