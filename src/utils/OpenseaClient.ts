@@ -15,7 +15,6 @@ class OpenseaClient {
       this.openseaport = new OpenSeaPort(provider, {
         networkName: Network.Main,
       })
-      //console.log(this.openseaport);
     } catch (err) {
       console.warn('Error in opensea initialization.', err);
       throw (err);
