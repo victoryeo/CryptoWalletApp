@@ -174,10 +174,12 @@ function* sendAmount(action: any) {
     const currentAccount: AccountRetType = yield select(Selectors.currentAccount);
     const secretPassword: string | null = yield call(getSecretPassword);
     // decrypt the enc private key
-    const bytes: string = yield CryptoJS.AES.decrypt(
+    const bytes: Buffer = yield CryptoJS.AES.decrypt(
       currentAccount.encryptedPrivateKey,
       secretPassword);
-    const privateKey = bytes.toString(CryptoJS.enc.Utf8);
+    console.log(bytes)
+    const privateKey = (bytes as Buffer).toString(CryptoJS.enc.Utf8);
+    console.log(privateKey)
     // call web3Client 
     web3Client.sendAmount(from, to, amount, privateKey);
   } catch (err) {
