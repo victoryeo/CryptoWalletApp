@@ -101,7 +101,7 @@ const CreatePassword = ({ navigation }: any) => {
   });
 
   const getValidationError = (key: keyof typeof errors): string => 
-    touched[key] && errors[key];
+    touched[key] && errors[key] || '';
 
   return (
       <SafeAreaView style={[styles.safeAreaContainer]}>
