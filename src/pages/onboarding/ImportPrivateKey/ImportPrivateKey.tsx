@@ -48,8 +48,8 @@ const ImportPrivateKey = ({ navigation }: any) => {
       onSubmit: handleFormSubmission,
     });
 
-  const ref_password = useRef<typeof TextInput>(null)
-  const ref_confirmPassword = useRef<typeof TextInput>(null)
+  const ref_password = useRef<any>(null)
+  const ref_confirmPassword = useRef<any>(null)
 
   useEffect(() => {
     // below line called on first mount
