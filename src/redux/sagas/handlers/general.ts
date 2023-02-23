@@ -36,7 +36,7 @@ function* initApp() {
 function* rehydrate() {
   console.log('--- APP INIT ---');
 
-  // We want to launch screen to show at least 100msec for the animation
+  // We want the launch screen to delay at least 100msec
   yield all([call(initApp), delay(100)]);
 
   yield put(authActions.APP_INIT_DONE());
@@ -44,5 +44,7 @@ function* rehydrate() {
 }
 
 export default function* generalSaga() {
-  yield all([yield takeEvery(REHYDRATE, rehydrate)]);
+  yield all(
+    yield takeEvery(REHYDRATE, rehydrate)
+  );
 }

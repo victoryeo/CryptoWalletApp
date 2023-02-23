@@ -8,7 +8,7 @@ function* signOut(action: any): Generator<unknown, any, unknown> {
 }
 
 export default function* authSaga() {
-  yield all([
+  yield all(
     yield takeEvery(authActions.SIGN_OUT, signOut),
-  ])
+  )
 }
